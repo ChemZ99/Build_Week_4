@@ -25,5 +25,48 @@ public class Biglietto {
     /*@Column(name = "Stato")
     Enum (vidimizato, utilizabile)*/ /*-DA COLLEGARE GLI ENUM-*/
 
-    
+    public Biglietto(LocalDate dataEmissione, LocalDate dataVidimazione, int veicoloEmissioine, int puntoEmissione) {
+        this.dataEmissione = dataEmissione;
+        this.dataVidimazione = dataVidimazione;
+        this.veicoloEmissioine = veicoloEmissioine;
+        this.puntoEmissione = puntoEmissione;
+    } /*-AGGIUNGERE STATO-*/
+
+    public LocalDate getDataEmissione() {
+        return dataEmissione;
+    }
+
+    public void setDataEmissione(LocalDate dataEmissione) {
+        this.dataEmissione = dataEmissione;
+    }
+
+    public LocalDate getDataVidimazione() {
+        return dataVidimazione;
+    }
+
+    public void setDataVidimazione(LocalDate dataVidimazione) {
+        this.dataVidimazione = dataVidimazione;
+    }
+
+    public int getVeicoloEmissioine() {
+        return veicoloEmissioine;
+    }
+
+    public void setVeicoloEmissioine(int veicoloEmissioine) {
+        this.veicoloEmissioine = veicoloEmissioine;
+    }
+
+    public int getPuntoEmissione() {
+        return puntoEmissione;
+    }
+
+    public void setPuntoEmissione(int puntoEmissione) {
+        this.puntoEmissione = puntoEmissione;
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    /*-GETTER E SETTER DELLO STATO-*/
 }
