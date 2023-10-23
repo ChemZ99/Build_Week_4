@@ -1,5 +1,8 @@
 package Main.Entities;
 
+import Main.Enum.Stato_abbonamento;
+import Main.Enum.Tipo_Abbonamento;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.UUID;
@@ -12,7 +15,7 @@ public class Abbonamento {
     @GeneratedValue
     private UUID id;
 
-    private StatoAbbonamento stato_abbonamento;
+    private Stato_abbonamento stato_abbonamento;
     @ManyToOne
     private Rivenditore_Autorizzato punto_emissione;
     private LocalDate data_emissione;
@@ -25,15 +28,11 @@ public class Abbonamento {
         return id;
     }
 
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    public StatoAbbonamento getStato_abbonamento() {
+    public Stato_abbonamento getStato_abbonamento() {
         return stato_abbonamento;
     }
 
-    public void setStato_abbonamento(StatoAbbonamento stato_abbonamento) {
+    public void setStato_abbonamento(Stato_abbonamento stato_abbonamento) {
         this.stato_abbonamento = stato_abbonamento;
     }
 
@@ -55,15 +54,10 @@ public class Abbonamento {
 
     public LocalDate getData_scadenza() {
         return data_scadenza;
-    }
+    }`
 
     public void setData_scadenza(LocalDate data_scadenza) {
         this.data_scadenza = data_scadenza;
-    }
-
-
-    public Utente getUtente() {
-        return utente;
     }
 
     public Tipo_Abbonamento getTipo_abbonamento() {
@@ -74,20 +68,36 @@ public class Abbonamento {
         this.tipo_abbonamento = tipo_abbonamento;
     }
 
+    public Utente getUtente() {
+        return utente;
+    }
+
     public void setUtente(Utente utente) {
         this.utente = utente;
     }
 
-    public Abbonamento(Tipo_Abbonamento tipo_abbonamento, Rivenditore_Autorizzato punto_emissione, LocalDate data_emissione, LocalDate data_scadenza, Validitá validitá, Utente utente) {
-        this.id = UUID.randomUUID();
-        this.Tipo_Abbonamento = tipo_abbonamento;
+    public Abbonamento(Stato_abbonamento stato_abbonamento, Rivenditore_Autorizzato punto_emissione, LocalDate data_emissione, LocalDate data_scadenza, Tipo_Abbonamento tipo_abbonamento, Utente utente) {
+        this.stato_abbonamento = stato_abbonamento;
         this.punto_emissione = punto_emissione;
         this.data_emissione = data_emissione;
         this.data_scadenza = data_scadenza;
-        this.validitá = validitá;
+        this.tipo_abbonamento = tipo_abbonamento;
         this.utente = utente;
     }
 
+
     public Abbonamento() {
+    }
+    @Override
+    public String toString() {
+        return "Abbonamento{" +
+                "id=" + id +
+                ", stato_abbonamento=" + stato_abbonamento +
+                ", punto_emissione=" + punto_emissione +
+                ", data_emissione=" + data_emissione +
+                ", data_scadenza=" + data_scadenza +
+                ", tipo_abbonamento=" + tipo_abbonamento +
+                ", utente=" + utente +
+                '}';
     }
 }

@@ -1,5 +1,7 @@
 package Main.Entities;
 
+import Main.Enum.Stato_abbonamento;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.UUID;
@@ -13,14 +15,14 @@ public class Tessera {
     private UUID id;
     private LocalDate data_creazione_tessera;
     private LocalDate data_scadenza_tessera;
-    private Stato_Abbonamento stato_abbonamento;
+    private Stato_abbonamento stato_abbonamento;
 
 
 
     public Tessera() {
     }
 
-    public Tessera(LocalDate data_creazione_tessera, LocalDate data_scadenza_tessera, Stato_Abbonamento stato_abbonamento) {
+    public Tessera(LocalDate data_creazione_tessera, LocalDate data_scadenza_tessera, Stato_abbonamento stato_abbonamento) {
         this.id = UUID.randomUUID();
         this.data_creazione_tessera = data_creazione_tessera;
         this.data_scadenza_tessera = data_scadenza_tessera;
@@ -39,15 +41,14 @@ public class Tessera {
         return id;
     }
 
-    public Stato_Abbonamento getStato_Abbonamento() {
+
+    public Stato_abbonamento getStato_abbonamento() {
         return stato_abbonamento;
     }
 
-    public void setStato_Abbonamento(Stato_Abbonamento stato_abbonamento) {
+    public void setStato_abbonamento(Stato_abbonamento stato_abbonamento) {
         this.stato_abbonamento = stato_abbonamento;
     }
-
-
 
     public LocalDate getData_scadenza_tessera() {
         return data_scadenza_tessera;
