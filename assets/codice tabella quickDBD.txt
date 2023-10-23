@@ -1,0 +1,91 @@
+# Modify this code to update the DB schema diagram.
+# To reset the sample schema, replace everything with
+# two dots ('..' - without quotes).
+
+Biglietto
+-
+id PK int
+data_emissione LocalDate
+data_vidimazione LocalDate
+veicolo_vidimazione Veicolo FK >- Veicolo.id
+punto_emissione int
+stato enum # vidimato o utilizzabile
+
+
+Abbonamento
+-
+id PK int
+tipo enum # settimanale o mensile
+punto_emissione Rivenditore_Autorizzato FK >- Rivenditore_Autorizzato.id
+data_emissione LocalDate
+data_scadenza LocalDate
+validita enum # valido o scaduto
+utente Utente FK >- Utente.abbonamento
+
+
+
+Distributore_Automatico_extends_Rivenditore
+----
+id PK int FK -< Biglietto.punto_emissione
+stato enum # attivo o fuori servizio
+biglietti_venduti
+
+
+Rivenditore_Autorizzato 
+------------
+id PK int FK -< Biglietto.punto_emissione
+biglietti_venduti
+
+
+Utente
+-
+id PK int 
+nome String
+cognome String
+data_nascita LocalDate
+abbonamento Abbonamento
+tessera FK - Tessera.id
+
+Tessera
+-
+id PK int
+data_creazione_tessera LocalDate
+data_scadenza_tessera Localdate
+validita enum #valido o scaduto
+
+
+Veicolo
+-
+id PK int
+stato enum # in servizio oppure in manutenzione
+tipo enum
+capienza int
+servizi Servizio
+manutenzione Manutenzione
+
+Servizio
+-
+id PK int 
+inizio Datetime
+fine Datetime
+durata int
+numero_tratte int
+veicolo Veicolo FK >- Veicolo.id
+tratta Tratta FK >- Tratta.id
+
+
+
+Manutenzione
+-
+id PK int 
+inizio Datetime
+fine Datetime
+durata int
+veicolo Veicolo FK >- Veicolo.id
+
+Tratta
+-
+id PK int
+partenza String
+capolinea String
+tempo_medio int
