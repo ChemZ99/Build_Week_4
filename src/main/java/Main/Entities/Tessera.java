@@ -1,12 +1,12 @@
 package Main.Entities;
 
 
-
 import Main.Enum.Stato_abbonamento;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.UUID;
+
 @Entity
 @Table(name = "tessere")
 @DiscriminatorValue("tessera")
@@ -17,18 +17,25 @@ public class Tessera {
     private UUID id;
     private LocalDate data_creazione_tessera;
     private LocalDate data_scadenza_tessera;
+    @Enumerated(EnumType.STRING)
     private Stato_abbonamento stato_abbonamento;
-
+    @OneToOne(mappedBy = "tessera")
+    private Utente utente;
 
 
     public Tessera() {
     }
 
-    public Tessera(LocalDate data_creazione_tessera, LocalDate data_scadenza_tessera, Stato_abbonamento stato_abbonamento) {
+    public Tessera(LocalDate data_creazione_tessera) {
         this.id = UUID.randomUUID();
         this.data_creazione_tessera = data_creazione_tessera;
-        this.data_scadenza_tessera = data_scadenza_tessera;
-        this.stato_abbonamento = stato_abbonamento;
+        this.data_scadenza_tessera = data_creazione_tessera.plusYears(1);
+        if (LocalDate.now().isAfter(data_scadenza_tessera)) {
+            this.stato_abbonamento = Stato_abbonamento.SCADUTO;
+        } else {
+            this.stato_abbonamento = Stato_abbonamento.VALIDO;
+        }
+
     }
 
 
@@ -39,6 +46,7 @@ public class Tessera {
     public void setData_creazione_tessera(LocalDate data_creazione_tessera) {
         this.data_creazione_tessera = data_creazione_tessera;
     }
+
     public UUID getId() {
         return id;
     }
@@ -59,6 +67,7 @@ public class Tessera {
     public void setData_scadenza_tessera(LocalDate data_scadenza_tessera) {
         this.data_scadenza_tessera = data_scadenza_tessera;
     }
+
     @Override
     public String toString() {
         return "Tessera{" +

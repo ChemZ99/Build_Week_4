@@ -1,9 +1,15 @@
 package Main.Entities;
 
-public class Rivenditore extends Emissione {
-    public Rivenditore () {}
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import java.util.List;
 
-    public Rivenditore(int biglietti_Venduti) {
-        super(biglietti_Venduti);
+@Entity
+public class Rivenditore extends Emissione {
+    @OneToMany(mappedBy = "punto_emissione")
+    private List<Abbonamento> lista;
+
+    public Rivenditore() {
     }
+
 }

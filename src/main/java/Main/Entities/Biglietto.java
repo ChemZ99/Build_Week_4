@@ -1,4 +1,3 @@
-
 package Main.Entities;
 
 import Main.Enum.Stato_Biglietto;
@@ -18,18 +17,24 @@ public class Biglietto {
     private LocalDate dataEmissione;
     @Column(name = "Data_Vidimazione")
     private LocalDate dataVidimazione;
-    @Column(name = "Veicolo vidimazione")
-    private int veicoloEmisione; /*-DA SISTEMARE-*/
-    @Column(name = "Punto_Emissione")
-    private int puntoEmissione;  /*-DA SISTEMARE-*/
+    @ManyToOne
+    @JoinColumn(name = "id_veicolo")
+    private Veicolo veicolo;
+
+    @ManyToOne
+    @JoinColumn(name = "id_rivenditore")
+    private Emissione puntoEmissione;
     @Enumerated
     @Column(name = "Stato")
     private Stato_Biglietto stato;
 
-    public Biglietto(LocalDate dataEmissione, LocalDate dataVidimazione, int veicoloEmisione, int puntoEmissione, Stato_Biglietto stato) {
+    public Biglietto() {
+    }
+
+    public Biglietto(LocalDate dataEmissione, LocalDate dataVidimazione, Veicolo veicolo, Emissione puntoEmissione, Stato_Biglietto stato) {
         this.dataEmissione = dataEmissione;
         this.dataVidimazione = dataVidimazione;
-        this.veicoloEmisione = veicoloEmisione;
+        this.veicolo = veicolo;
         this.puntoEmissione = puntoEmissione;
         this.stato = stato;
     }
@@ -54,19 +59,19 @@ public class Biglietto {
         this.dataVidimazione = dataVidimazione;
     }
 
-    public int getVeicoloEmisione() {
-        return veicoloEmisione;
+    public Veicolo getVeicolo() {
+        return veicolo;
     }
 
-    public void setVeicoloEmisione(int veicoloEmisione) {
-        this.veicoloEmisione = veicoloEmisione;
+    public void setVeicolo(Veicolo veicolo) {
+        this.veicolo = veicolo;
     }
 
-    public int getPuntoEmissione() {
+    public Emissione getPuntoEmissione() {
         return puntoEmissione;
     }
 
-    public void setPuntoEmissione(int puntoEmissione) {
+    public void setPuntoEmissione(Emissione puntoEmissione) {
         this.puntoEmissione = puntoEmissione;
     }
 
@@ -84,7 +89,7 @@ public class Biglietto {
                 "id=" + id +
                 ", dataEmissione=" + dataEmissione +
                 ", dataVidimazione=" + dataVidimazione +
-                ", veicoloEmisione=" + veicoloEmisione +
+                ", veicolo=" + veicolo +
                 ", puntoEmissione=" + puntoEmissione +
                 ", stato=" + stato +
                 '}';

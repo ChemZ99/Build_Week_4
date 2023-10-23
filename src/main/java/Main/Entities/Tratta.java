@@ -1,23 +1,30 @@
 package Main.Entities;
 
 import javax.persistence.*;
-import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
 @Table(name = "Tratte")
 public class Tratta {
+
+
+    @Column(name = "Tempo_Medio")
+    private int tempo_medio;
     @Id
     @Column(name = "Id")
-    UUID Id;
+    private UUID Id;
     @Column(name = "Partenze")
-    String partenza;
+    private String partenza;
     @Column(name = "Arrivi")
-    String capolinea;
-    @Column(name = "Tempo_Medio")
-    final DateTimeFormatter tempo_medio;
+    private String capolinea;
+    @OneToMany(mappedBy = "tratta")
+    private List<Servizio> lista_servizi;
 
-    public Tratta(String partenza, String capolinea, DateTimeFormatter tempo_medio) {
+    public Tratta() {
+    }
+
+    public Tratta(String partenza, String capolinea, int tempo_medio) {
         this.partenza = partenza;
         this.capolinea = capolinea;
         this.tempo_medio = tempo_medio;
@@ -39,12 +46,20 @@ public class Tratta {
         this.capolinea = capolinea;
     }
 
-    public DateTimeFormatter getTempo_medio() {
+    public int getTempo_medio() {
         return tempo_medio;
     }
 
     public UUID getId() {
         return Id;
+    }
+
+    public List<Servizio> getLista_servizi() {
+        return lista_servizi;
+    }
+
+    public void setLista_servizi(List<Servizio> lista_servizi) {
+        this.lista_servizi = lista_servizi;
     }
 
     @Override

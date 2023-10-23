@@ -1,6 +1,7 @@
 package Main.Entities;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -11,32 +12,24 @@ public abstract class Emissione {
     @GeneratedValue
     private UUID Id;
 
-    @Column
-    private int Biglietti_Venduti;
+    @OneToMany(mappedBy = "puntoEmissione")
+    private List<Biglietto> lista_biglietti;
 
-    public Emissione () {}
-
-    public Emissione(int biglietti_Venduti) {
-        Biglietti_Venduti = biglietti_Venduti;
+    public Emissione() {
     }
+
 
     public UUID getId() {
         return Id;
     }
 
-    public int getBiglietti_Venduti() {
-        return Biglietti_Venduti;
+    public List<Biglietto> getLista_biglietti() {
+        return lista_biglietti;
     }
 
-    public void setBiglietti_Venduti(int biglietti_Venduti) {
-        Biglietti_Venduti = biglietti_Venduti;
+    public void setLista_biglietti(List<Biglietto> lista_biglietti) {
+        this.lista_biglietti = lista_biglietti;
     }
 
-    @Override
-    public String toString() {
-        return "Emissione{" +
-                "Id=" + Id +
-                ", Biglietti_Venduti=" + Biglietti_Venduti +
-                '}';
-    }
+
 }

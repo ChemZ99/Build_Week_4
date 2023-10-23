@@ -1,14 +1,11 @@
 package Main.Entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
-@Table(name="manutenzioni")
+@Table(name = "manutenzioni")
 public class Manutenzione {
     @Id
     @GeneratedValue
@@ -16,6 +13,9 @@ public class Manutenzione {
     private LocalDate inizio;
     private LocalDate fine;
     private int durata;
+    @ManyToOne
+    @JoinColumn(name = "id_veicolo")
+    private Veicolo veicolo;
 
     public Manutenzione() {
     }
@@ -29,6 +29,13 @@ public class Manutenzione {
         return id;
     }
 
+    public Veicolo getVeicolo() {
+        return veicolo;
+    }
+
+    public void setVeicolo(Veicolo veicolo) {
+        this.veicolo = veicolo;
+    }
 
     public LocalDate getInizio() {
         return inizio;

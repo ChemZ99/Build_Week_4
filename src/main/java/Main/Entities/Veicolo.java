@@ -1,27 +1,35 @@
 package Main.Entities;
 
 
-
-import Main.Enum.Tipo_Veicolo;
 import Main.Enum.Stato_Veicolo;
+import Main.Enum.Tipo_Veicolo;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 import java.util.UUID;
 
 
 @Entity
-@Table(name="veicoli")
+@Table(name = "veicoli")
 public class Veicolo {
     @Id
     @GeneratedValue
-   private UUID id;
-   private Stato_Veicolo stato;
-   private Tipo_Veicolo tipo;
+    private UUID id;
+    @Enumerated(EnumType.STRING)
+    private Stato_Veicolo stato;
+    @Enumerated(EnumType.STRING)
+    private Tipo_Veicolo tipo;
 
-public Veicolo(){}
+    @OneToMany(mappedBy = "veicolo")
+    private List<Biglietto> lista_biglietti;
+
+    @OneToMany(mappedBy = "veicolo")
+    private List<Manutenzione> lista_veicolo;
+    @OneToMany(mappedBy = "veicolo")
+    private List<Servizio> lista_servizi;
+
+    public Veicolo() {
+    }
 
     public Veicolo(Stato_Veicolo stato, Tipo_Veicolo tipo) {
         this.stato = stato;
@@ -47,6 +55,31 @@ public Veicolo(){}
 
     public void setTipo(Tipo_Veicolo tipo) {
         this.tipo = tipo;
+    }
+
+
+    public List<Biglietto> getLista_biglietti() {
+        return lista_biglietti;
+    }
+
+    public void setLista_biglietti(List<Biglietto> lista_biglietti) {
+        this.lista_biglietti = lista_biglietti;
+    }
+
+    public List<Manutenzione> getLista_veicolo() {
+        return lista_veicolo;
+    }
+
+    public void setLista_veicolo(List<Manutenzione> lista_veicolo) {
+        this.lista_veicolo = lista_veicolo;
+    }
+
+    public List<Servizio> getLista_servizi() {
+        return lista_servizi;
+    }
+
+    public void setLista_servizi(List<Servizio> lista_servizi) {
+        this.lista_servizi = lista_servizi;
     }
 
     @Override

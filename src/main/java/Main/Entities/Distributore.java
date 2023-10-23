@@ -11,10 +11,11 @@ public class Distributore extends Emissione {
     @Column
     private Stato_Distributore Stato;
 
-    public Distributore () {}
+    public Distributore() {
+    }
 
     public Distributore(int biglietti_Venduti, Stato_Distributore stato) {
-        super(biglietti_Venduti);
+
         Stato = stato;
     }
 

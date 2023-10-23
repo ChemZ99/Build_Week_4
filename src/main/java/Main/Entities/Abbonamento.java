@@ -15,16 +15,35 @@ public class Abbonamento {
     @Id
     @GeneratedValue
     private UUID id;
-    @ManyToOne
-    @JoinColumn(name = "stato_abbonamento_id")
+
+    @Enumerated(EnumType.STRING)
     private Stato_abbonamento stato_abbonamento;
     @ManyToOne
+    @JoinColumn(name = "id_rivenditore")
     private Rivenditore punto_emissione;
     private LocalDate data_emissione;
     private LocalDate data_scadenza;
+    @Enumerated(EnumType.STRING)
     private Tipo_Abbonamento tipo_abbonamento;
     @ManyToOne
+    @JoinColumn(name = "utente_id")
     private Utente utente;
+
+    public Abbonamento(Stato_abbonamento stato_abbonamento, Rivenditore punto_emissione, LocalDate data_emissione, LocalDate data_scadenza, Tipo_Abbonamento tipo_abbonamento, Utente utente) {
+        this.stato_abbonamento = stato_abbonamento;
+        this.punto_emissione = punto_emissione;
+        this.data_emissione = data_emissione;
+        this.tipo_abbonamento = tipo_abbonamento;
+        this.utente = utente;
+        if (tipo_abbonamento == Tipo_Abbonamento.MENSILE) {
+            this.data_scadenza = data_emissione.plusMonths(1);
+        } else {
+            this.data_scadenza = data_emissione.plusDays(7);
+        }
+    }
+
+    public Abbonamento() {
+    }
 
     public UUID getId() {
         return id;
@@ -78,18 +97,6 @@ public class Abbonamento {
         this.utente = utente;
     }
 
-    public Abbonamento(Stato_abbonamento stato_abbonamento, Rivenditore punto_emissione, LocalDate data_emissione, LocalDate data_scadenza, Tipo_Abbonamento tipo_abbonamento, Utente utente) {
-        this.stato_abbonamento = stato_abbonamento;
-        this.punto_emissione = punto_emissione;
-        this.data_emissione = data_emissione;
-        this.data_scadenza = data_scadenza;
-        this.tipo_abbonamento = tipo_abbonamento;
-        this.utente = utente;
-    }
-
-
-    public Abbonamento() {
-    }
     @Override
     public String toString() {
         return "Abbonamento{" +
