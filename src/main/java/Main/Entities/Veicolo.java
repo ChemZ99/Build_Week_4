@@ -1,16 +1,19 @@
 package Main.Entities;
 
 
-import Entities.Enum.Stato_Veicolo;
+
 import Main.Enum.Tipo_Veicolo;
+import Main.Enum.Stato_Veicolo;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.UUID;
 
 
 @Entity
+@Table(name="veicoli")
 public class Veicolo {
     @Id
     @GeneratedValue
