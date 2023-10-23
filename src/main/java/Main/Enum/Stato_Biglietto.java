@@ -1,5 +1,5 @@
-package Main.Enum;
 
+package Main.Enum;
 
 import java.util.Random;
 
