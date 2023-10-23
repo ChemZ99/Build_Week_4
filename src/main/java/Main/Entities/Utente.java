@@ -4,8 +4,8 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.UUID;
 @Entity
-@Table(name = "Utenti")
-@DiscriminatorValue("Utente")
+@Table(name = "utenti")
+@DiscriminatorValue("utente")
 
 public class Utente {
     @Id

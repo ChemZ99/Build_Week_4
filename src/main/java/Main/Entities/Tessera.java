@@ -6,8 +6,8 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.UUID;
 @Entity
-@Table(name = "Tessere")
-@DiscriminatorValue("Tessera")
+@Table(name = "tessere")
+@DiscriminatorValue("tessera")
 
 public class Tessera {
     @Id
