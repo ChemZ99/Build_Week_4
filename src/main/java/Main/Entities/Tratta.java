@@ -1,4 +1,4 @@
-package Entities;
+package Main.Entities;
 
 import javax.persistence.*;
 import java.time.format.DateTimeFormatter;
