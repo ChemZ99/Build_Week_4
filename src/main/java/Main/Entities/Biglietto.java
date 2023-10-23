@@ -1,10 +1,9 @@
 
 package Main.Entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import Main.Enum.Stato_Biglietto;
+
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.UUID;
 
@@ -16,22 +15,28 @@ public class Biglietto {
     UUID id;
 
     @Column(name = "Data_Emissione")
-    LocalDate dataEmissione;
+    private LocalDate dataEmissione;
     @Column(name = "Data_Vidimazione")
-    LocalDate dataVidimazione;
+    private LocalDate dataVidimazione;
     @Column(name = "Veicolo vidimazione")
-    int veicoloEmissioine; /*-DA SISTEMARE-*/
+    private int veicoloEmisione; /*-DA SISTEMARE-*/
     @Column(name = "Punto_Emissione")
-    int puntoEmissione;  /*-DA SISTEMARE-*/
-    /*@Column(name = "Stato")
-    Enum (vidimizato, utilizabile)*/ /*-DA COLLEGARE GLI ENUM-*/
+    private int puntoEmissione;  /*-DA SISTEMARE-*/
+    @Enumerated
+    @Column(name = "Stato")
+    private Stato_Biglietto stato;
 
-    public Biglietto(LocalDate dataEmissione, LocalDate dataVidimazione, int veicoloEmissioine, int puntoEmissione) {
+    public Biglietto(LocalDate dataEmissione, LocalDate dataVidimazione, int veicoloEmisione, int puntoEmissione, Stato_Biglietto stato) {
         this.dataEmissione = dataEmissione;
         this.dataVidimazione = dataVidimazione;
-        this.veicoloEmissioine = veicoloEmissioine;
+        this.veicoloEmisione = veicoloEmisione;
         this.puntoEmissione = puntoEmissione;
-    } /*-AGGIUNGERE STATO-*/
+        this.stato = stato;
+    }
+
+    public UUID getId() {
+        return id;
+    }
 
     public LocalDate getDataEmissione() {
         return dataEmissione;
@@ -49,12 +54,12 @@ public class Biglietto {
         this.dataVidimazione = dataVidimazione;
     }
 
-    public int getVeicoloEmissioine() {
-        return veicoloEmissioine;
+    public int getVeicoloEmisione() {
+        return veicoloEmisione;
     }
 
-    public void setVeicoloEmissioine(int veicoloEmissioine) {
-        this.veicoloEmissioine = veicoloEmissioine;
+    public void setVeicoloEmisione(int veicoloEmisione) {
+        this.veicoloEmisione = veicoloEmisione;
     }
 
     public int getPuntoEmissione() {
@@ -65,9 +70,23 @@ public class Biglietto {
         this.puntoEmissione = puntoEmissione;
     }
 
-    public UUID getId() {
-        return id;
+    public Stato_Biglietto getStato() {
+        return stato;
     }
 
-    /*-GETTER E SETTER DELLO STATO-*/
+    public void setStato(Stato_Biglietto stato) {
+        this.stato = stato;
+    }
+
+    @Override
+    public String toString() {
+        return "Biglietto{" +
+                "id=" + id +
+                ", dataEmissione=" + dataEmissione +
+                ", dataVidimazione=" + dataVidimazione +
+                ", veicoloEmisione=" + veicoloEmisione +
+                ", puntoEmissione=" + puntoEmissione +
+                ", stato=" + stato +
+                '}';
+    }
 }
