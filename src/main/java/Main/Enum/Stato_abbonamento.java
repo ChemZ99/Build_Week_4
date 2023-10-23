@@ -1,5 +1,8 @@
 package Main.Enum;
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 
 import java.util.Random;
 

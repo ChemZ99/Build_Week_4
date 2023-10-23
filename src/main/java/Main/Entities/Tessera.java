@@ -1,5 +1,7 @@
 package Main.Entities;
 
+
+
 import Main.Enum.Stato_abbonamento;
 
 import javax.persistence.*;
