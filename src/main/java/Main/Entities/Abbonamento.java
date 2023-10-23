@@ -19,7 +19,7 @@ public class Abbonamento {
     @JoinColumn(name = "stato_abbonamento_id")
     private Stato_abbonamento stato_abbonamento;
     @ManyToOne
-    private Rivenditore_Autorizzato punto_emissione;
+    private Rivenditore punto_emissione;
     private LocalDate data_emissione;
     private LocalDate data_scadenza;
     private Tipo_Abbonamento tipo_abbonamento;
@@ -38,11 +38,11 @@ public class Abbonamento {
         this.stato_abbonamento = stato_abbonamento;
     }
 
-    public Rivenditore_Autorizzato getPunto_emissione() {
+    public Rivenditore getPunto_emissione() {
         return punto_emissione;
     }
 
-    public void setPunto_emissione(Rivenditore_Autorizzato punto_emissione) {
+    public void setPunto_emissione(Rivenditore punto_emissione) {
         this.punto_emissione = punto_emissione;
     }
 
@@ -56,7 +56,7 @@ public class Abbonamento {
 
     public LocalDate getData_scadenza() {
         return data_scadenza;
-    }`
+    }
 
     public void setData_scadenza(LocalDate data_scadenza) {
         this.data_scadenza = data_scadenza;
@@ -78,7 +78,7 @@ public class Abbonamento {
         this.utente = utente;
     }
 
-    public Abbonamento(Stato_abbonamento stato_abbonamento, Rivenditore_Autorizzato punto_emissione, LocalDate data_emissione, LocalDate data_scadenza, Tipo_Abbonamento tipo_abbonamento, Utente utente) {
+    public Abbonamento(Stato_abbonamento stato_abbonamento, Rivenditore punto_emissione, LocalDate data_emissione, LocalDate data_scadenza, Tipo_Abbonamento tipo_abbonamento, Utente utente) {
         this.stato_abbonamento = stato_abbonamento;
         this.punto_emissione = punto_emissione;
         this.data_emissione = data_emissione;
