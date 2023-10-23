@@ -1,8 +1,6 @@
-<<<<<<<< HEAD:src/main/java/Entities/Enum/Stato_Veicolo.java
-package Entities.Enum;
-========
+
 package Main.Enum;
->>>>>>>> develop:src/main/java/Main/Enum/Stato_Veicolo.java
+
 
 import java.util.Random;
 
