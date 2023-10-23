@@ -1,14 +1,11 @@
 package Entities;
 
-import org.hibernate.annotations.Table;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.format.DateTimeFormatter;
 import java.util.UUID;
 
 @Entity
+@Table(name = "Tratte")
 public class Tratta {
     @Id
     @Column(name = "Id")
@@ -48,5 +45,15 @@ public class Tratta {
 
     public UUID getId() {
         return Id;
+    }
+
+    @Override
+    public String toString() {
+        return "Tratta{" +
+                "Id=" + Id +
+                ", partenza='" + partenza + '\'' +
+                ", capolinea='" + capolinea + '\'' +
+                ", tempo_medio=" + tempo_medio +
+                '}';
     }
 }
