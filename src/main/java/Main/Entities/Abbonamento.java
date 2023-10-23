@@ -1,5 +1,6 @@
 package Main.Entities;
 
+
 import Main.Enum.Stato_abbonamento;
 import Main.Enum.Tipo_Abbonamento;
 
@@ -8,13 +9,14 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
-@Table(name = "Abbonamenti")
-@DiscriminatorValue("Abbonamento")
+@Table(name = "abbonamenti")
+@DiscriminatorValue("abbonamento")
 public class Abbonamento {
     @Id
     @GeneratedValue
     private UUID id;
-
+    @ManyToOne
+    @JoinColumn(name = "stato_abbonamento_id")
     private Stato_abbonamento stato_abbonamento;
     @ManyToOne
     private Rivenditore_Autorizzato punto_emissione;
