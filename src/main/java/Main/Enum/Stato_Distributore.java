@@ -1,4 +1,8 @@
+<<<<<<<< HEAD:src/main/java/Entities/Enum/Stato_Distributore.java
 package Entities.Enum;
+========
+package Main.Enum;
+>>>>>>>> develop:src/main/java/Main/Enum/Stato_Distributore.java
 
 import java.util.Random;
 

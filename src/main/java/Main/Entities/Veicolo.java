@@ -1,8 +1,8 @@
-package Entities;
+package Main.Entities;
 
 
 import Entities.Enum.Stato_Veicolo;
-import Entities.Enum.Tipo_Veicolo;
+import Main.Enum.Tipo_Veicolo;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

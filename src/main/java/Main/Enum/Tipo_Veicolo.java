@@ -1,4 +1,4 @@
-package Entities.Enum;
+package Main.Enum;
 
 import java.util.Random;
 

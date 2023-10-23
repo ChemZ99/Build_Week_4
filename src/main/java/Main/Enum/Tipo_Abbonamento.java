@@ -1,4 +1,8 @@
+<<<<<<<< HEAD:src/main/java/Entities/Enum/Tipo_Abbonamento.java
 package Entities.Enum;
+========
+package Main.Enum;
+>>>>>>>> develop:src/main/java/Main/Enum/Tipo_Abbonamento.java
 
 import java.util.Random;
 
