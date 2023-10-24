@@ -1,10 +1,11 @@
 package Main.DAO;
 
 import Main.Entities.Tessera;
-import Main.Entities.Utente;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.TypedQuery;
+import java.util.List;
 import java.util.UUID;
 
 public class TesseraDAO {
@@ -38,5 +39,10 @@ public class TesseraDAO {
         } else {
             System.err.println("La tessera con l'id " + id + " non esiste");
         }
+    }
+
+    public List<Tessera> getAllTessere() {
+        TypedQuery<Tessera> lista = em.createQuery("SELECT t FROM Tessera t", Tessera.class);
+        return lista.getResultList();
     }
 }

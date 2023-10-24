@@ -25,14 +25,15 @@ public class Abbonamento {
     @Enumerated(EnumType.STRING)
     private Tipo_Abbonamento tipo_abbonamento;
     @ManyToOne
-    @JoinColumn(name = "utente_id")
-    private Utente utente;
+    @JoinColumn(name = "id_tessera")
+    private Tessera tessera;
 
-    public Abbonamento(Rivenditore punto_emissione, LocalDate data_emissione, Tipo_Abbonamento tipo_abbonamento, Utente utente) {
+    public Abbonamento(Rivenditore punto_emissione, LocalDate data_emissione, Tipo_Abbonamento tipo_abbonamento, Tessera tessera) {
+        
         this.punto_emissione = punto_emissione;
         this.data_emissione = data_emissione;
         this.tipo_abbonamento = tipo_abbonamento;
-        this.utente = utente;
+        this.tessera = tessera;
         if (tipo_abbonamento == Tipo_Abbonamento.MENSILE) {
             this.data_scadenza = data_emissione.plusMonths(1);
         } else {
@@ -92,12 +93,12 @@ public class Abbonamento {
         this.tipo_abbonamento = tipo_abbonamento;
     }
 
-    public Utente getUtente() {
-        return utente;
+    public Tessera getTessera() {
+        return tessera;
     }
 
-    public void setUtente(Utente utente) {
-        this.utente = utente;
+    public void setTessera(Tessera tessera) {
+        this.tessera = tessera;
     }
 
     @Override
@@ -109,7 +110,7 @@ public class Abbonamento {
                 ", data_emissione=" + data_emissione +
                 ", data_scadenza=" + data_scadenza +
                 ", tipo_abbonamento=" + tipo_abbonamento +
-                ", utente=" + utente +
+                ", tessera=" + tessera +
                 '}';
     }
 }
