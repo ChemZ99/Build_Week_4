@@ -68,7 +68,7 @@ public class Tratta {
                 "Id=" + Id +
                 ", partenza='" + partenza + '\'' +
                 ", capolinea='" + capolinea + '\'' +
-                ", tempo_medio=" + tempo_medio +
+                ", tempo_medio=" + tempo_medio + " minuti " +
                 '}';
     }
 }

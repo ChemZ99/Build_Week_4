@@ -28,8 +28,8 @@ public class Abbonamento {
     @JoinColumn(name = "utente_id")
     private Utente utente;
 
-    public Abbonamento(Stato_abbonamento stato_abbonamento, Rivenditore punto_emissione, LocalDate data_emissione, LocalDate data_scadenza, Tipo_Abbonamento tipo_abbonamento, Utente utente) {
-        this.stato_abbonamento = stato_abbonamento;
+    public Abbonamento(Rivenditore punto_emissione, LocalDate data_emissione, Tipo_Abbonamento tipo_abbonamento, Utente utente) {
+
         this.punto_emissione = punto_emissione;
         this.data_emissione = data_emissione;
         this.tipo_abbonamento = tipo_abbonamento;
@@ -38,6 +38,11 @@ public class Abbonamento {
             this.data_scadenza = data_emissione.plusMonths(1);
         } else {
             this.data_scadenza = data_emissione.plusDays(7);
+        }
+        if (this.data_scadenza.isAfter(LocalDate.now())) {
+            this.stato_abbonamento = Stato_abbonamento.VALIDO;
+        } else {
+            this.stato_abbonamento = Stato_abbonamento.SCADUTO;
         }
     }
 

@@ -11,6 +11,8 @@ public abstract class Emissione {
     @Id
     @GeneratedValue
     private UUID Id;
+    @Column(name = "indirizzo")
+    private String indirizzo;
 
     @OneToMany(mappedBy = "puntoEmissione")
     private List<Biglietto> lista_biglietti;
@@ -18,6 +20,9 @@ public abstract class Emissione {
     public Emissione() {
     }
 
+    public Emissione(String indirizzo) {
+        this.indirizzo = indirizzo;
+    }
 
     public UUID getId() {
         return Id;
@@ -31,5 +36,11 @@ public abstract class Emissione {
         this.lista_biglietti = lista_biglietti;
     }
 
+    public String getIndirizzo() {
+        return indirizzo;
+    }
 
+    public void setIndirizzo(String indirizzo) {
+        this.indirizzo = indirizzo;
+    }
 }
