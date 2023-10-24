@@ -2,7 +2,6 @@ package Main.Entities;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -14,21 +13,17 @@ public class Utente {
     private String nome;
     private String cognome;
     private LocalDate data_nascita;
-    @OneToMany(mappedBy = "utente")
-    private List<Abbonamento> abbonamento;
-    @OneToOne(cascade = CascadeType.REMOVE)
-    @JoinColumn(name = "id_tessera")
+
+    @OneToOne(mappedBy = "utente")
     private Tessera tessera;
 
     public Utente() {
     }
 
-    public Utente(String nome, String cognome, LocalDate data_nascita, Tessera tessera) {
-        this.id = UUID.randomUUID();
+    public Utente(String nome, String cognome, LocalDate data_nascita) {
         this.nome = nome;
         this.cognome = cognome;
         this.data_nascita = data_nascita;
-        this.tessera = tessera;
     }
 
     public UUID getId() {
@@ -60,14 +55,6 @@ public class Utente {
         this.data_nascita = data_nascita;
     }
 
-    public List<Abbonamento> getAbbonamento() {
-        return abbonamento;
-    }
-
-    public void setAbbonamento(List<Abbonamento> abbonamento) {
-        this.abbonamento = abbonamento;
-    }
-
     public Tessera getTessera() {
         return tessera;
     }
@@ -83,8 +70,6 @@ public class Utente {
                 ", nome='" + nome + '\'' +
                 ", cognome='" + cognome + '\'' +
                 ", data_nascita=" + data_nascita +
-                ", abbonamento=" + abbonamento +
-                ", tessera=" + tessera +
                 '}';
     }
 }

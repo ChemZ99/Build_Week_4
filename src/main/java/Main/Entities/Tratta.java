@@ -12,6 +12,7 @@ public class Tratta {
     @Column(name = "Tempo_Medio")
     private int tempo_medio;
     @Id
+    @GeneratedValue
     @Column(name = "Id")
     private UUID Id;
     @Column(name = "Partenze")

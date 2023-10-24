@@ -10,6 +10,7 @@ import java.util.UUID;
 @Table(name = "Biglietti")
 public class Biglietto {
     @Id
+    @GeneratedValue
     @Column(name = "Id")
     UUID id;
 
@@ -24,7 +25,7 @@ public class Biglietto {
     @ManyToOne
     @JoinColumn(name = "id_rivenditore")
     private Emissione puntoEmissione;
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     @Column(name = "Stato")
     private Stato_Biglietto stato;
 
