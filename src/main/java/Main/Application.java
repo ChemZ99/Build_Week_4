@@ -14,6 +14,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
+import java.util.UUID;
 import java.util.function.Supplier;
 
 public class Application {
@@ -92,10 +93,17 @@ public class Application {
 
 
         //CREIAMO TRATTE
-        for (int i = 0; i < 100; i++) {
-            trattaDAO.save(trattaSupplier.get());
+//        for (int i = 0; i < 100; i++) {
+//            trattaDAO.save(trattaSupplier.get());
+//
+//        }
+        UUID id = UUID.fromString("e2ce0c28-79f0-4e57-ac4b-7d453d2c0bb2");
+        System.out.println(emissioneDAO.getById(id));
 
-        }
+        abbonamentoDAO.getNumAbbByPeriod(LocalDate.of(2023,1,1), LocalDate.of(2023,5,1));
+        bigliettoDAO.getNumTicketsByPeriod(LocalDate.of(2023,1,1), LocalDate.of(2023,5,1));
+        abbonamentoDAO.getNumAbbByPV(id);
+        bigliettoDAO.getNumTicketsByPV(id);
         System.out.println("Hello World!");
     }
 }
