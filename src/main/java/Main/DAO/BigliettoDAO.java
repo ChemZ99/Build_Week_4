@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 import java.util.List;
+import java.time.LocalDate;
 import java.util.UUID;
 
 
@@ -42,8 +43,32 @@ public class BigliettoDAO {
         }
     }
 
+
     public List<Biglietto> getAllBiglietti() {
         TypedQuery<Biglietto> lista = em.createQuery("SELECT b from Biglietto b", Biglietto.class);
         return lista.getResultList();
+    }
+
+    public void getNumTicketsByPeriod(LocalDate startDate, LocalDate endDate) {
+        TypedQuery<Long> numTicketQuery = em.createQuery("SELECT COUNT(b) FROM Biglietto b WHERE b.dataEmissione BETWEEN :startDate AND :endDate", Long.class);
+        numTicketQuery.setParameter("startDate", startDate);
+        numTicketQuery.setParameter("endDate", endDate);
+        Long count = numTicketQuery.getSingleResult();
+        if (count > 0) {
+            System.out.println("Il numero di biglietti venduti in questo periodo di tempo è: " + count);
+        } else {
+            System.out.println("Non sono presenti abbonamenti in questo periodo di tempo");
+        }
+    }
+
+    public void getNumTicketsByPV(UUID pv){
+        TypedQuery<Long> numAbbPVQuery = em.createQuery("SELECT COUNT(b) FROM Biglietto b WHERE b.puntoEmissione.id = :pv", Long.class);
+        numAbbPVQuery.setParameter("pv", pv);
+        Long count = numAbbPVQuery.getSingleResult();
+        if (count > 0) {
+            System.out.println("Il numero di biglietti venduti dal rivenditore con ID "+ pv + "é: "+ count);
+        } else {
+            System.out.println("Non sono presenti biglietti venduti da questo rivenditore");
+        }
     }
 }

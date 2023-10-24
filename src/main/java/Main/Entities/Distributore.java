@@ -34,6 +34,8 @@ public class Distributore extends Emissione {
     public String toString() {
         return "Distributore{" +
                 "Stato=" + Stato +
-                "} " + super.toString();
+                ", Id=" + super.getId() +
+                ", indirizzo='" + super.getIndirizzo() + '\'' +
+                "} " ;
     }
 }

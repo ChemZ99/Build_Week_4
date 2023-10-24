@@ -163,5 +163,6 @@ public class Application {
                 bigliettoDAO.save(b);
             }
         }
+
     }
 }

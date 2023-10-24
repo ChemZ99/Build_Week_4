@@ -48,9 +48,20 @@ public class AbbonamentoDAO {
         numAbbQuery.setParameter("endDate", endDate);
         Long count = numAbbQuery.getSingleResult();
         if (count > 0) {
-            System.out.println("Il numero di abbonamenti in questo periodo di tempo è: " + count);
+            System.out.println("Il numero di abbonamenti venduti in questo periodo di tempo è: " + count);
         } else {
             System.out.println("Non sono presenti abbonamenti in questo periodo di tempo");
+        }
+    }
+
+    public void getNumAbbByPV(UUID pv){
+        TypedQuery<Long> numAbbPVQuery = em.createQuery("SELECT COUNT(a) FROM Abbonamento a WHERE a.punto_emissione.id = :pv", Long.class);
+        numAbbPVQuery.setParameter("pv", pv);
+        Long count = numAbbPVQuery.getSingleResult();
+        if (count > 0) {
+            System.out.println("Il numero di abbonamenti venduti dal rivenditore con ID "+ pv + "é: "+ count);
+        } else {
+            System.out.println("Non sono presenti abbonamenti venduti da questo rivenditore");
         }
     }
 }
