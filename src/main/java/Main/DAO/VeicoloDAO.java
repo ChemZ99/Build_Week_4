@@ -4,7 +4,10 @@ import Main.Entities.Veicolo;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.TypedQuery;
+import java.util.List;
 import java.util.UUID;
+
 
 public class VeicoloDAO {
     private final EntityManager em;
@@ -37,5 +40,20 @@ public class VeicoloDAO {
         } else {
             System.err.println("Il veicolo con l'id " + id + " non esiste");
         }
+    }
+
+    public List<Veicolo> getAllVeicoli() {
+        TypedQuery<Veicolo> lista = em.createQuery("SELECT v from Veicolo v", Veicolo.class);
+        return lista.getResultList();
+    }
+
+    public List<Veicolo> getAllVeicoliServizio() {
+        TypedQuery<Veicolo> lista = em.createQuery("SELECT v from Veicolo v WHERE stato= 'SERVIZIO'", Veicolo.class);
+        return lista.getResultList();
+    }
+
+    public List<Veicolo> getAllVeicoliManutenzione() {
+        TypedQuery<Veicolo> lista = em.createQuery("SELECT v from Veicolo v WHERE stato= 'MANUTENZIONE'", Veicolo.class);
+        return lista.getResultList();
     }
 }

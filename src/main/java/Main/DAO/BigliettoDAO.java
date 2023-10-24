@@ -5,8 +5,10 @@ import Main.Entities.Biglietto;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
+import java.util.List;
 import java.time.LocalDate;
 import java.util.UUID;
+
 
 public class BigliettoDAO {
     private final EntityManager em;
@@ -40,6 +42,13 @@ public class BigliettoDAO {
             System.err.println("Il biglietto con l'id " + id + " non esiste");
         }
     }
+
+
+    public List<Biglietto> getAllBiglietti() {
+        TypedQuery<Biglietto> lista = em.createQuery("SELECT b from Biglietto b", Biglietto.class);
+        return lista.getResultList();
+    }
+
     public void getNumTicketsByPeriod(LocalDate startDate, LocalDate endDate) {
         TypedQuery<Long> numTicketQuery = em.createQuery("SELECT COUNT(b) FROM Biglietto b WHERE b.dataEmissione BETWEEN :startDate AND :endDate", Long.class);
         numTicketQuery.setParameter("startDate", startDate);
