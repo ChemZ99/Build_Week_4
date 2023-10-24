@@ -4,6 +4,7 @@ import Main.Entities.Biglietto;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import java.util.UUID;
 
 public class BigliettoDAO {
     private final EntityManager em;
@@ -20,12 +21,12 @@ public class BigliettoDAO {
         System.out.println("Biglietto salvato correttamente");
     }
 
-    public Biglietto getById(long id) {
+    public Biglietto getById(UUID id) {
         return em.find(Biglietto.class, id);
 
     }
 
-    public void delete(long id) {
+    public void delete(UUID id) {
         Biglietto selectedEl = em.find(Biglietto.class, id);
         if (selectedEl != null) {
             EntityTransaction transaction = em.getTransaction();

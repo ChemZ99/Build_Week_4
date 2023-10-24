@@ -4,6 +4,7 @@ import Main.Entities.Manutenzione;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import java.util.UUID;
 
 public class ManutenzioneDAO {
     private final EntityManager em;
@@ -20,12 +21,12 @@ public class ManutenzioneDAO {
         System.out.println("Manutenzione salvata correttamente");
     }
 
-    public Manutenzione getById(long id) {
+    public Manutenzione getById(UUID id) {
         return em.find(Manutenzione.class, id);
 
     }
 
-    public void delete(long id) {
+    public void delete(UUID id) {
         Manutenzione selectedEl = em.find(Manutenzione.class, id);
         if (selectedEl != null) {
             EntityTransaction transaction = em.getTransaction();

@@ -4,8 +4,9 @@ import Main.Entities.Utente;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import java.util.UUID;
 
-    public class UtenteDAO {
+public class UtenteDAO {
         private final EntityManager em;
 
         public UtenteDAO(EntityManager em) {
@@ -20,12 +21,12 @@ import javax.persistence.EntityTransaction;
             System.out.println("Utente salvato correttamente");
         }
 
-        public Utente getById(long id) {
+        public Utente getById(UUID id) {
             return em.find(Utente.class, id);
 
         }
 
-        public void delete(long id) {
+        public void delete(UUID id) {
             Utente selectedEl = em.find(Utente.class, id);
             if (selectedEl != null) {
                 EntityTransaction transaction = em.getTransaction();

@@ -5,6 +5,7 @@ import Main.Entities.Utente;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import java.util.UUID;
 
 public class TesseraDAO {
     private final EntityManager em;
@@ -21,12 +22,12 @@ public class TesseraDAO {
         System.out.println("Tessera salvata correttamente");
     }
 
-    public Tessera getById(long id) {
+    public Tessera getById(UUID id) {
         return em.find(Tessera.class, id);
 
     }
 
-    public void delete(long id) {
+    public void delete(UUID id) {
         Tessera selectedEl = em.find(Tessera.class, id);
         if (selectedEl != null) {
             EntityTransaction transaction = em.getTransaction();
