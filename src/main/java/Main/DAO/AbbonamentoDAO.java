@@ -37,4 +37,4 @@ public class AbbonamentoDAO {
             System.err.println("L'abbonamento con l'id " + id + " non esiste");
         }
     }
-``}
+}
