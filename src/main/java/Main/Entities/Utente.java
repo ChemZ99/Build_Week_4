@@ -24,7 +24,6 @@ public class Utente {
     }
 
     public Utente(String nome, String cognome, LocalDate data_nascita, Tessera tessera) {
-        this.id = UUID.randomUUID();
         this.nome = nome;
         this.cognome = cognome;
         this.data_nascita = data_nascita;

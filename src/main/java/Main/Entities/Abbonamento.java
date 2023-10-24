@@ -29,7 +29,6 @@ public class Abbonamento {
     private Utente utente;
 
     public Abbonamento(Rivenditore punto_emissione, LocalDate data_emissione, Tipo_Abbonamento tipo_abbonamento, Utente utente) {
-
         this.punto_emissione = punto_emissione;
         this.data_emissione = data_emissione;
         this.tipo_abbonamento = tipo_abbonamento;

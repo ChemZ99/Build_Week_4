@@ -25,7 +25,6 @@ public class Tessera {
     }
 
     public Tessera(LocalDate data_creazione_tessera) {
-        this.id = UUID.randomUUID();
         this.data_creazione_tessera = data_creazione_tessera;
         this.data_scadenza_tessera = data_creazione_tessera.plusYears(1);
         if (LocalDate.now().isAfter(data_scadenza_tessera)) {
