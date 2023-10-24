@@ -4,6 +4,7 @@ import Main.Entities.Tratta;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import java.util.UUID;
 
 public class TrattaDAO {
     private final EntityManager em;
@@ -20,12 +21,12 @@ public class TrattaDAO {
         System.out.println("Tratta salvata correttamente");
     }
 
-    public Tratta getById(long id) {
+    public Tratta getById(UUID id) {
         return em.find(Tratta.class, id);
 
     }
 
-    public void delete(long id) {
+    public void delete(UUID id) {
         Tratta selectedEl = em.find(Tratta.class, id);
         if (selectedEl != null) {
             EntityTransaction transaction = em.getTransaction();

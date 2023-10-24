@@ -4,6 +4,7 @@ import Main.Entities.Veicolo;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import java.util.UUID;
 
 public class VeicoloDAO {
     private final EntityManager em;
@@ -20,12 +21,12 @@ public class VeicoloDAO {
         System.out.println("Veicolo salvato correttamente");
     }
 
-    public Veicolo getById(long id) {
+    public Veicolo getById(UUID id) {
         return em.find(Veicolo.class, id);
 
     }
 
-    public void delete(long id) {
+    public void delete(UUID id) {
         Veicolo selectedEl = em.find(Veicolo.class, id);
         if (selectedEl != null) {
             EntityTransaction transaction = em.getTransaction();

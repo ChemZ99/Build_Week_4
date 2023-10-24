@@ -4,6 +4,7 @@ import Main.Entities.Servizio;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import java.util.UUID;
 
 public class ServizioDAO {
     private final EntityManager em;
@@ -20,12 +21,12 @@ public class ServizioDAO {
         System.out.println("Servizio salvato correttamente");
     }
 
-    public Servizio getById(long id) {
+    public Servizio getById(UUID id) {
         return em.find(Servizio.class, id);
 
     }
 
-    public void delete(long id) {
+    public void delete(UUID id) {
         Servizio selectedEl = em.find(Servizio.class, id);
         if (selectedEl != null) {
             EntityTransaction transaction = em.getTransaction();
