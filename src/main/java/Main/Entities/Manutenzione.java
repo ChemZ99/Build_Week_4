@@ -20,9 +20,10 @@ public class Manutenzione {
     public Manutenzione() {
     }
 
-    public Manutenzione(LocalDate inizio, LocalDate fine) {
+    public Manutenzione(LocalDate inizio, LocalDate fine, Veicolo veicolo) {
         this.inizio = inizio;
         this.fine = fine;
+        this.veicolo = veicolo;
     }
 
     public UUID getId() {
