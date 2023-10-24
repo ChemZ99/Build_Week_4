@@ -1,6 +1,7 @@
 package Main.DAO;
 
 import Main.Entities.Abbonamento;
+import Main.Enum.Stato_abbonamento;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -63,6 +64,12 @@ public class AbbonamentoDAO {
         } else {
             System.out.println("Non sono presenti abbonamenti venduti da questo rivenditore");
         }
+    }
+
+    public void isSubsciptionValid(UUID idTes){
+        TypedQuery<Stato_abbonamento> isValidQuery = em.createQuery("SELECT a.stato_abbonamento FROM Abbonamento a WHERE a.tessera.id = :idTes", Stato_abbonamento.class);
+    isValidQuery.setParameter("idTes", idTes);
+        System.out.println("Lo stato dell'abbonamento é: " + isValidQuery.getSingleResult().toString());
     }
 }
 
