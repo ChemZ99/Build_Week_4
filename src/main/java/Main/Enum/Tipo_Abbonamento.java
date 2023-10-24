@@ -8,9 +8,9 @@ public enum Tipo_Abbonamento {
     MENSILE;
     private static final Random rndm = new Random();
 
-    public static Tipo_Abbonamento randomPeriodic() {
+    public static Tipo_Abbonamento randomTipoAbbonamento() {
 
-        Tipo_Abbonamento[] tipo= values();
+        Tipo_Abbonamento[] tipo = values();
         return tipo[rndm.nextInt(tipo.length)];
 
     }

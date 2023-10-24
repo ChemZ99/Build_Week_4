@@ -31,12 +31,10 @@ public class Biglietto {
     public Biglietto() {
     }
 
-    public Biglietto(LocalDate dataEmissione, LocalDate dataVidimazione, Veicolo veicolo, Emissione puntoEmissione, Stato_Biglietto stato) {
+    public Biglietto(LocalDate dataEmissione, Emissione puntoEmissione) {
         this.dataEmissione = dataEmissione;
-        this.dataVidimazione = dataVidimazione;
-        this.veicolo = veicolo;
         this.puntoEmissione = puntoEmissione;
-        this.stato = stato;
+        this.stato = Stato_Biglietto.UTILIZZABILE;
     }
 
     public UUID getId() {

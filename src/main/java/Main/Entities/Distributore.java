@@ -14,8 +14,8 @@ public class Distributore extends Emissione {
     public Distributore() {
     }
 
-    public Distributore(int biglietti_Venduti, Stato_Distributore stato) {
-
+    public Distributore(String indirizzo, Stato_Distributore stato) {
+        super(indirizzo);
         Stato = stato;
     }
 

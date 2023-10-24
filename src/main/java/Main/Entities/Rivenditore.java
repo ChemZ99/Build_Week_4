@@ -12,4 +12,15 @@ public class Rivenditore extends Emissione {
     public Rivenditore() {
     }
 
+    public Rivenditore(String indirizzo) {
+        super(indirizzo);
+    }
+
+    public List<Abbonamento> getLista() {
+        return lista;
+    }
+
+    public void setLista(List<Abbonamento> lista) {
+        this.lista = lista;
+    }
 }
