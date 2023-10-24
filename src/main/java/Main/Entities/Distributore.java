@@ -3,11 +3,14 @@ package Main.Entities;
 import Main.Enum.Stato_Distributore;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 
+@Entity
 public class Distributore extends Emissione {
 
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     @Column
     private Stato_Distributore Stato;
 
