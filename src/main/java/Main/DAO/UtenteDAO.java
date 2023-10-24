@@ -34,7 +34,7 @@ import javax.persistence.EntityTransaction;
                 transaction.commit();
                 System.out.println("L'utente con l'id " + id + " é stato correttamente cancellato");
             } else {
-                System.err.println("Il utente con l'id " + id + " non esiste");
+                System.err.println("L'utente con l'id " + id + " non esiste");
             }
         }
 }

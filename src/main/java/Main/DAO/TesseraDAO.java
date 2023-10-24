@@ -1,5 +1,6 @@
 package Main.DAO;
 
+import Main.Entities.Tessera;
 import Main.Entities.Utente;
 
 import javax.persistence.EntityManager;
@@ -12,21 +13,21 @@ public class TesseraDAO {
         this.em = em;
     }
 
-    public void save(Utente utente) {
+    public void save(Tessera tessera) {
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
-        em.persist(utente);
+        em.persist(tessera);
         transaction.commit();
         System.out.println("Tessera salvata correttamente");
     }
 
-    public Utente getById(long id) {
-        return em.find(Utente.class, id);
+    public Tessera getById(long id) {
+        return em.find(Tessera.class, id);
 
     }
 
     public void delete(long id) {
-        Utente selectedEl = em.find(Utente.class, id);
+        Tessera selectedEl = em.find(Tessera.class, id);
         if (selectedEl != null) {
             EntityTransaction transaction = em.getTransaction();
             transaction.begin();
