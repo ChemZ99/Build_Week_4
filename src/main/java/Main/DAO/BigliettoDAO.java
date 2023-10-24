@@ -4,7 +4,10 @@ import Main.Entities.Biglietto;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.TypedQuery;
+import java.util.List;
 import java.util.UUID;
+
 
 public class BigliettoDAO {
     private final EntityManager em;
@@ -37,5 +40,10 @@ public class BigliettoDAO {
         } else {
             System.err.println("Il biglietto con l'id " + id + " non esiste");
         }
+    }
+
+    public List<Biglietto> getAllBiglietti() {
+        TypedQuery<Biglietto> lista = em.createQuery("SELECT b from Biglietto b", Biglietto.class);
+        return lista.getResultList();
     }
 }

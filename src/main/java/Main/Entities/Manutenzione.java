@@ -20,9 +20,19 @@ public class Manutenzione {
     public Manutenzione() {
     }
 
-    public Manutenzione(LocalDate inizio, LocalDate fine) {
+    public Manutenzione(LocalDate inizio, LocalDate fine, Veicolo veicolo) {
         this.inizio = inizio;
         this.fine = fine;
+        long d1 = inizio.toEpochDay();
+        if (fine == null) {
+            long d2 = LocalDate.now().toEpochDay();
+            this.durata = (int) (d2 - d1);
+        } else {
+            long d3 = fine.toEpochDay();
+            this.durata = (int) (d3 - d1);
+        }
+
+        this.veicolo = veicolo;
     }
 
     public UUID getId() {
