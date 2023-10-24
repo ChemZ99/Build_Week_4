@@ -9,8 +9,6 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "tessere")
-@DiscriminatorValue("tessera")
-
 public class Tessera {
     @Id
     @GeneratedValue

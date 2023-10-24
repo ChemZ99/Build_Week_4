@@ -10,7 +10,6 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "abbonamenti")
-@DiscriminatorValue("abbonamento")
 public class Abbonamento {
     @Id
     @GeneratedValue

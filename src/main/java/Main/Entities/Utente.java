@@ -7,8 +7,6 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "utenti")
-@DiscriminatorValue("utente")
-
 public class Utente {
     @Id
     @GeneratedValue
