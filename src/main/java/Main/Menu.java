@@ -1,10 +1,27 @@
 package Main;
 
+import Main.DAO.*;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.UUID;
 
 public class Menu {
+    public static EntityManagerFactory emf = Persistence.createEntityManagerFactory("BUILD_WEEK_4");
     public static void main(String[] args) {
+        EntityManager em = emf.createEntityManager();
+        EmissioneDAO emissioneDAO = new EmissioneDAO(em);
+        UtenteDAO utenteDAO = new UtenteDAO(em);
+        TrattaDAO trattaDAO = new TrattaDAO(em);
+        VeicoloDAO veicoloDAO = new VeicoloDAO(em);
+        AbbonamentoDAO abbonamentoDAO = new AbbonamentoDAO(em);
+        BigliettoDAO bigliettoDAO = new BigliettoDAO(em);
+        ManutenzioneDAO manutenzioneDAO = new ManutenzioneDAO(em);
+        ServizioDAO servizioDAO = new ServizioDAO(em);
+        TesseraDAO tesseraDAO = new TesseraDAO(em);
         //***************************************************SCANNER MENU***************************************************
         Scanner input = new Scanner(System.in);
         int mainCounter = 99;
@@ -34,6 +51,7 @@ public class Menu {
                             switch (printCounter) {
                                 case 1: {
                                     System.out.println("************************************LISTA DI UTENTI************************************");
+                                    utenteDAO.getAllUsers().forEach(System.out::println);
                                     break;
                                 }
                                 case 2: {

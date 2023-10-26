@@ -4,6 +4,8 @@ import Main.Entities.Utente;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.TypedQuery;
+import java.util.List;
 import java.util.UUID;
 
 public class UtenteDAO {
@@ -37,5 +39,10 @@ public class UtenteDAO {
             } else {
                 System.err.println("L'utente con l'id " + id + " non esiste");
             }
+        }
+
+        public List<Utente> getAllUsers(){
+            TypedQuery<Utente> utentiQuery = em.createQuery("SELECT u FROM Utente u", Utente.class);
+            return utentiQuery.getResultList();
         }
 }
