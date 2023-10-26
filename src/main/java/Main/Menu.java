@@ -116,9 +116,11 @@ public class Menu {
 
                                                 idRivenditore = UUID.fromString(idRiv);
                                                 System.out.println();
-                                                System.out.println("*****************************BIGLIETTI TOTALI PER RIVENDITORE******************************");
-                                                bigliettoDAO.getNumTicketsByPV(idRivenditore);
-                                                System.out.println();
+                                                System.out.println("*****************************BIGLIETTI E ABBONAMENTI TOTALI PER RIVENDITORE******************************");
+                                                long numBigliettiRiv = bigliettoDAO.getNumTicketsByPV(idRivenditore);
+                                                long numAbbRi = abbonamentoDAO.getNumAbbByPV(idRivenditore);
+                                                long tot = numAbbRi + numBigliettiRiv;
+                                                System.out.println("Il numero di biglietti e abbonamenti totali venduti da questo rivenditore é: " + tot);
                                                 break;
                                             } else {
                                                 System.out.println("La stringa deve avere esattamente 36 caratteri. Riprova.");
@@ -269,6 +271,7 @@ public class Menu {
                                     System.out.println("inserisci l' UUID dell' utente");
                                     String target = input.nextLine();
                                     UUID targetId = UUID.fromString(target);
+
                                     break;
                                 }
                                 case 2: {
