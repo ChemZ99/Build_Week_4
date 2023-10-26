@@ -40,6 +40,14 @@ public abstract class Emissione {
         return indirizzo;
     }
 
+    @Override
+    public String toString() {
+        return "Emissione{" +
+                "Id=" + Id +
+                ", indirizzo='" + indirizzo + '\'' +
+                '}';
+    }
+
     public void setIndirizzo(String indirizzo) {
         this.indirizzo = indirizzo;
     }

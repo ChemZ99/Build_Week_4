@@ -20,6 +20,14 @@ public class Rivenditore extends Emissione {
         return lista;
     }
 
+    @Override
+    public String toString() {
+        return "Rivenditore{" +
+                "Id=" + super.getId() +
+                ", indirizzo='" + super.getIndirizzo() +
+                '}';
+    }
+
     public void setLista(List<Abbonamento> lista) {
         this.lista = lista;
     }

@@ -40,8 +40,8 @@ public class Menu {
                         while (printCounter != 0) {
                             System.out.println("************************************FUNZIONI DI LETTURA************************************");
                             System.out.println("scrivi 1 per ricevere una lista di utenti, 2 per ricevere una lista di veicoli, 3 per ricevere una lista di rivenditori");
-                            System.out.println("scrivi 4 per ottenere il totale dei biglietti e degli abbonamenti emessi in un certo lasso di tempo");
-                            System.out.println("scrivi 5 per ottenere i biglietti e gli abbonamenti emessi da uno specifico rivenditore");
+                            System.out.println("scrivi 4 per ottenere il numero dei biglietti e degli abbonamenti venduti in un certo lasso di tempo");
+                            System.out.println("scrivi 5 per ottenere il numero dei biglietti e gli abbonamenti venduti da uno specifico rivenditore");
                             System.out.println("scrivi 6 per verificare la validita' dell' abbonamento di un utente attraverso il codice della tessera");
                             System.out.println("scrivi 7 per ottenere il numero di biglietti vidimati in un certo lasso di tempo");
                             System.out.println("scrivi 8 per ottenere il numero di biglietti vidimati su uno specifico veicolo");
@@ -56,10 +56,12 @@ public class Menu {
                                 }
                                 case 2: {
                                     System.out.println("************************************LISTA DI VEICOLI************************************");
+                                    veicoloDAO.getAllVeicoli().forEach(System.out::println);
                                     break;
                                 }
                                 case 3: {
                                     System.out.println("************************************LISTA DI RIVENDITORI************************************");
+                                    emissioneDAO.getAllRivenditori().forEach(System.out::println);
                                     break;
                                 }
                                 case 4: {
