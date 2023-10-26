@@ -36,35 +36,6 @@ public class Application {
         //RIEMPIMENTO DATABASE
         //fillerDataBase();
 
-//        TROVA TUTTI I BIGLIETTI VITIMATI SU UN VEICOLO
-//        UUID id = UUID.fromString("01364c7a-fd7f-41a7-9d75-9b9e49f7be8f");
-//        bigliettoDAO.getNumTicketsVitimatiByVeicolo(id);
-
-        //TROVA TUTTI I BIGLIETTI VITIMATI IN UN DETERMINATO PERIODO
-        //bigliettoDAO.getNumTicketsVitimatiByPeriod(LocalDate.of(2020, 1, 1), LocalDate.of(2021, 1, 1));
-
-        //TROVA IL NUMERO DEI BIGLIETTI VENDUTI IN UN DETERMINATO PERIODO
-//        bigliettoDAO.getNumTicketsByPeriod(LocalDate.of(2020, 1, 1), LocalDate.of(2021, 1, 1));
-
-        //TROVA IL NUMERO DEGLI ABBONAMENTI VENDUTI IN UN DETERMINATO PERIODO
-//        abbonamentoDAO.getNumAbbByPeriod(LocalDate.of(2020, 1, 1), LocalDate.of(2021, 1, 1));
-
-        //TROVA IL NUMERO DEI BIGLIETTI VENDUTI DA UN CERTO VENDITORE
-//        UUID id = UUID.fromString("0216e492-3224-48d5-936f-6c7e22229cd8");
-//        bigliettoDAO.getNumTicketsByPV(id);
-
-        //TROVA IL NUMERO DEGLI ABBONAMENTI VENDUTI DA UN CERTO VENDITORE
-//        UUID id = UUID.fromString("0543dfda-a38b-4ff8-9936-74cf004619c9");
-//        abbonamentoDAO.getNumAbbByPV(id);
-
-        //VERIFICA VALIDITÁ ABBONAMENTO
-//        UUID id = UUID.fromString("003d0abf-fc2e-48ea-9fb0-bd1edc216ed5");
-//        abbonamentoDAO.isSubsciptionValid(id);
-
-        //DETTAGLI SERVIZIO
-//        UUID id = UUID.fromString("0009b1c7-eef0-4282-adb3-b9e62c8e704d");
-//        servizioDAO.servizioDetails(id);
-//        System.out.println("Hello World!");
     }
 
     public static void fillerDataBase() {

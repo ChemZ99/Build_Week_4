@@ -104,7 +104,6 @@ public class Menu {
                                         }
                                     }
                                     break;
-
                                 }
                                 case 5: {
                                     UUID idRivenditore;
@@ -157,15 +156,90 @@ public class Menu {
                                     break;
                                 }
                                 case 7: {
-                                    System.out.println("*************************BIGLIETTI VIDIMATI IN UN LASSO DI TEMPO**************************");
+                                    LocalDate startDate;
+                                    LocalDate endDate;
+
+                                    while (true) {
+                                        System.out.println("Inserisci la data d'inizio (AAAA-MM-GG): ");
+                                        String startDateStr = input.nextLine();
+
+                                        try {
+                                            startDate = LocalDate.parse(startDateStr);
+                                            break;
+                                        } catch (Exception e) {
+                                            System.out.println("Data non valida. Riprova.");
+                                        }
+                                    }
+                                    while (true) {
+                                        System.out.println("Inserisci la data di fine (AAAA-MM-GG): ");
+                                        String endDateStr = input.nextLine();
+
+                                        try {
+                                            endDate = LocalDate.parse(endDateStr);
+                                            if (endDate.isAfter(startDate)) {
+                                                System.out.println("La data di fine deve essere uguale o successiva alla data d'inizio. Riprova.");
+                                            }else if (endDate.isAfter(LocalDate.now())){
+                                                System.out.println("La data di fine non puó essere nel futuro. Riprova.");
+                                            }else {
+                                                System.out.println();
+                                                System.out.println("*************************BIGLIETTI VIDIMATI IN UN LASSO DI TEMPO**************************");
+                                                bigliettoDAO.getNumTicketsVitimatiByPeriod(startDate,endDate);
+                                                break;
+                                            }
+                                        } catch (Exception e) {
+                                            System.out.println("Data non valida. Riprova.");
+                                        }
+                                    }
                                     break;
                                 }
                                 case 8: {
-                                    System.out.println("*************************BIGLIETTI VIDIMATI IN UN CERTO VEICOLO**************************");
+                                    UUID idVeicolo;
+                                    while (true) {
+                                        System.out.println("Inserisci l'id di un veicolo.");
+                                        String idV = input.nextLine();
+
+                                        try {
+                                            if (idV.length() == 36) {
+
+                                                idVeicolo = UUID.fromString(idV);
+                                                System.out.println();
+                                                System.out.println("*************************BIGLIETTI VIDIMATI IN UN CERTO VEICOLO**************************");
+                                                bigliettoDAO.getNumTicketsVitimatiByVeicolo(idVeicolo);
+                                                System.out.println();
+                                                break;
+                                            } else {
+                                                System.out.println("La stringa deve avere esattamente 36 caratteri. Riprova.");
+                                            }
+
+                                        } catch (Exception e) {
+                                            System.out.println("UUID non valido. Riprova.");
+                                        }
+                                    }
                                     break;
                                 }
                                 case 9: {
-                                    System.out.println("*************************TRATTA E TEMPO EFFETTIVO DEL VEICOLO**************************");
+                                    UUID idServizio;
+                                    while (true) {
+                                        System.out.println("Inserisci l'id di un servizio.");
+                                        String idServ = input.nextLine();
+
+                                        try {
+                                            if (idServ.length() == 36) {
+
+                                                idServizio = UUID.fromString(idServ);
+                                                System.out.println();
+                                                System.out.println("*************************TRATTA E TEMPO EFFETTIVO DEL VEICOLO**************************");
+                                                servizioDAO.servizioDetails(idServizio);
+                                                System.out.println();
+                                                break;
+                                            } else {
+                                                System.out.println("La stringa deve avere esattamente 36 caratteri. Riprova.");
+                                            }
+
+                                        } catch (Exception e) {
+                                            System.out.println("UUID non valido. Riprova.");
+                                        }
+                                    }
                                     break;
                                 }
                             }
