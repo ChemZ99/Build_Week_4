@@ -43,7 +43,7 @@ public class AbbonamentoDAO {
         }
     }
 
-    public void getNumAbbByPeriod(LocalDate startDate, LocalDate endDate) {
+    public long getNumAbbByPeriod(LocalDate startDate, LocalDate endDate) {
         TypedQuery<Long> numAbbQuery = em.createQuery("SELECT COUNT(a) FROM Abbonamento a WHERE a.data_emissione BETWEEN :startDate AND :endDate", Long.class);
         numAbbQuery.setParameter("startDate", startDate);
         numAbbQuery.setParameter("endDate", endDate);
@@ -53,9 +53,10 @@ public class AbbonamentoDAO {
         } else {
             System.out.println("Non sono presenti abbonamenti in questo periodo di tempo");
         }
+        return count;
     }
 
-    public void getNumAbbByPV(UUID pv){
+    public Long getNumAbbByPV(UUID pv){
         TypedQuery<Long> numAbbPVQuery = em.createQuery("SELECT COUNT(a) FROM Abbonamento a WHERE a.punto_emissione.id = :pv", Long.class);
         numAbbPVQuery.setParameter("pv", pv);
         Long count = numAbbPVQuery.getSingleResult();
@@ -64,6 +65,7 @@ public class AbbonamentoDAO {
         } else {
             System.out.println("Non sono presenti abbonamenti venduti da questo rivenditore");
         }
+        return count;
     }
 
     public void isSubsciptionValid(UUID idTes){

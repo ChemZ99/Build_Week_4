@@ -49,7 +49,7 @@ public class BigliettoDAO {
         return lista.getResultList();
     }
 
-    public void getNumTicketsByPeriod(LocalDate startDate, LocalDate endDate) {
+    public Long getNumTicketsByPeriod(LocalDate startDate, LocalDate endDate) {
         TypedQuery<Long> numTicketQuery = em.createQuery("SELECT COUNT(b) FROM Biglietto b WHERE b.dataEmissione BETWEEN :startDate AND :endDate", Long.class);
         numTicketQuery.setParameter("startDate", startDate);
         numTicketQuery.setParameter("endDate", endDate);
@@ -59,9 +59,10 @@ public class BigliettoDAO {
         } else {
             System.out.println("Non sono presenti abbonamenti in questo periodo di tempo");
         }
+        return count;
     }
 
-    public void getNumTicketsByPV(UUID pv){
+    public Long getNumTicketsByPV(UUID pv){
         TypedQuery<Long> numAbbPVQuery = em.createQuery("SELECT COUNT(b) FROM Biglietto b WHERE b.puntoEmissione.id = :pv", Long.class);
         numAbbPVQuery.setParameter("pv", pv);
         Long count = numAbbPVQuery.getSingleResult();
@@ -70,5 +71,6 @@ public class BigliettoDAO {
         } else {
             System.out.println("Non sono presenti biglietti venduti da questo rivenditore");
         }
+        return count;
     }
 }
