@@ -1,7 +1,9 @@
 package Main.DAO;
 
+import Main.Entities.Distributore;
 import Main.Entities.Emissione;
 import Main.Entities.Rivenditore;
+import Main.Enum.Stato_Distributore;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -50,5 +52,20 @@ public class EmissioneDAO {
     public List<Rivenditore> getAllRivenditori() {
         TypedQuery<Rivenditore> lista = em.createQuery("SELECT e from Rivenditore e WHERE stato IS null", Rivenditore.class);
         return lista.getResultList();
+    }
+
+    public void changeDistributoreStatus(UUID id) {
+        Emissione e = getById(id);
+        if (e instanceof Distributore) {
+            if (((Distributore) e).getStato() == Stato_Distributore.ATTIVO) {
+                ((Distributore) e).setStato(Stato_Distributore.FUORI_SERVIZIO);
+            } else {
+                ((Distributore) e).setStato(Stato_Distributore.ATTIVO);
+            }
+            save(e);
+        } else {
+            System.out.println("l'id inserito non corrisponde a un distributore automatico!!!");
+        }
+
     }
 }

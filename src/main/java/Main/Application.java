@@ -8,11 +8,13 @@ import com.github.javafaker.Faker;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
+import java.util.UUID;
 import java.util.function.Supplier;
 
 public class Application {
@@ -32,21 +34,48 @@ public class Application {
         TesseraDAO tesseraDAO = new TesseraDAO(em);
         Random rndm = new Random();
 
-        //RIEMPIMENTO DATABASE
-        //fillerDataBase();
+//VITIMARE UN BIGLIETTO
 
-//        TROVA TUTTI I BIGLIETTI VITIMATI SU UN VEICOLO
-//        UUID id = UUID.fromString("01364c7a-fd7f-41a7-9d75-9b9e49f7be8f");
-//        bigliettoDAO.getNumTicketsVitimatiByVeicolo(id);
+        //UUID id = UUID.fromString("0019ae84-3279-459a-b41a-ebdbec683129");
+        //bigliettoDAO.checkTicket(id);
 
-        //TROVA TUTTI I BIGLIETTI VITIMATI IN UN DETERMINATO PERIODO
-        //bigliettoDAO.getNumTicketsVitimatiByPeriod(LocalDate.of(2020, 1, 1), LocalDate.of(2021, 1, 1));
+        //PASSARE DISTRIBUTORE DA ATTIVO A FUORI SERVIZIO
+        //PASSARE DISTRIBUTORE DA FUORI SERVIZIO A ATTIVO
+
+        //UUID id = UUID.fromString("07fbe3f2-72c4-40a1-856f-262d4a84ff35");
+        // emissioneDAO.changeDistributoreStatus(id);
+
+    }
 
 
-        //DETTAGLI SERVIZIO
-//        UUID id = UUID.fromString("0009b1c7-eef0-4282-adb3-b9e62c8e704d");
-//        servizioDAO.servizioDetails(id);
-//        System.out.println("Hello World!");
+    public static void changeVeicoloStatus(UUID id) {
+        EntityManager em = emf.createEntityManager();
+        ManutenzioneDAO manutenzioneDAO = new ManutenzioneDAO(em);
+        ServizioDAO servizioDAO = new ServizioDAO(em);
+        VeicoloDAO veicoloDAO = new VeicoloDAO(em);
+        Random rndm = new Random();
+        TrattaDAO trattaDAO = new TrattaDAO(em);
+
+        Veicolo v = veicoloDAO.getById(id);
+        if (v.getStato() == Stato_Veicolo.MANUTENZIONE) {
+            TypedQuery<Manutenzione> queryman = em.createQuery("SELECT m FROM Manutenzione m WHERE m.veicolo.id = :id AND m.fine = null", Manutenzione.class);
+            queryman.setParameter("id", id);
+            Manutenzione m = queryman.getSingleResult();
+            m.setFine(LocalDate.now());
+            manutenzioneDAO.save(m);
+            v.setStato(Stato_Veicolo.SERVIZIO);
+            veicoloDAO.save(v);
+            List<Tratta> listaTra = trattaDAO.getAllTratte();
+            int c = rndm.nextInt(0, listaTra.size() - 1);
+            Servizio s = new Servizio(LocalDateTime.now(), v, listaTra.get(c));
+            servizioDAO.save(s);
+        } else {
+            v.setStato(Stato_Veicolo.MANUTENZIONE);
+            veicoloDAO.save(v);
+            Manutenzione m = new Manutenzione(LocalDate.now(), null, v);
+            manutenzioneDAO.save(m);
+
+        }
     }
 
     public static void fillerDataBase() {
