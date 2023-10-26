@@ -5,8 +5,8 @@ import Main.Entities.Biglietto;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
-import java.util.List;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 
 
@@ -57,20 +57,43 @@ public class BigliettoDAO {
         if (count > 0) {
             System.out.println("Il numero di biglietti venduti in questo periodo di tempo è: " + count);
         } else {
-            System.out.println("Non sono presenti abbonamenti in questo periodo di tempo");
+            System.out.println("Non sono presenti biglietti venduti in questo periodo di tempo");
         }
         return count;
     }
 
-    public Long getNumTicketsByPV(UUID pv){
+    public Long getNumTicketsByPV(UUID pv) {
         TypedQuery<Long> numAbbPVQuery = em.createQuery("SELECT COUNT(b) FROM Biglietto b WHERE b.puntoEmissione.id = :pv", Long.class);
         numAbbPVQuery.setParameter("pv", pv);
         Long count = numAbbPVQuery.getSingleResult();
         if (count > 0) {
-            System.out.println("Il numero di biglietti venduti dal rivenditore con ID "+ pv + "é: "+ count);
+            System.out.println("Il numero di biglietti venduti dal rivenditore con ID " + pv + "é: " + count);
         } else {
             System.out.println("Non sono presenti biglietti venduti da questo rivenditore");
         }
         return count;
+    }
+
+    public void getNumTicketsVitimatiByVeicolo(UUID v) {
+        TypedQuery<Long> numAbbPVQuery = em.createQuery("SELECT COUNT(b) FROM Biglietto b WHERE b.veicolo.id = :v", Long.class);
+        numAbbPVQuery.setParameter("v", v);
+        Long count = numAbbPVQuery.getSingleResult();
+        if (count > 0) {
+            System.out.println("Il numero di biglietti vitimati sul veicolo con ID " + v + "é: " + count);
+        } else {
+            System.out.println("Non sono presenti biglietti vitimati da questo veicolo");
+        }
+    }
+
+    public void getNumTicketsVitimatiByPeriod(LocalDate startDate, LocalDate endDate) {
+        TypedQuery<Long> numTicketQuery = em.createQuery("SELECT COUNT(b) FROM Biglietto b WHERE b.dataVidimazione BETWEEN :startDate AND :endDate", Long.class);
+        numTicketQuery.setParameter("startDate", startDate);
+        numTicketQuery.setParameter("endDate", endDate);
+        Long count = numTicketQuery.getSingleResult();
+        if (count > 0) {
+            System.out.println("Il numero di biglietti vitimati in questo periodo di tempo è: " + count);
+        } else {
+            System.out.println("Non sono stati vitimati biglietti in questo periodo di tempo");
+        }
     }
 }

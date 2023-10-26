@@ -4,6 +4,7 @@ import Main.Entities.Servizio;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.TypedQuery;
 import java.util.UUID;
 
 public class ServizioDAO {
@@ -37,5 +38,12 @@ public class ServizioDAO {
         } else {
             System.err.println("Il servizio con l'id " + id + " non esiste");
         }
+    }
+
+    public void servizioDetails(UUID s) {
+        TypedQuery<Servizio> servizioQuery = em.createQuery("SELECT s FROM Servizio s INNER JOIN Tratta t ON t.id=s.tratta.id  WHERE s.id = :sid ", Servizio.class);
+        servizioQuery.setParameter("sid", s);
+
+        System.out.println(servizioQuery.getSingleResult());
     }
 }
