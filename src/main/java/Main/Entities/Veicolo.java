@@ -19,6 +19,7 @@ public class Veicolo {
     private Stato_Veicolo stato;
     @Enumerated(EnumType.STRING)
     private Tipo_Veicolo tipo;
+    private int capienza;
 
     @OneToMany(mappedBy = "veicolo")
     private List<Biglietto> lista_biglietti;
@@ -34,6 +35,11 @@ public class Veicolo {
     public Veicolo(Stato_Veicolo stato, Tipo_Veicolo tipo) {
         this.stato = stato;
         this.tipo = tipo;
+        if (tipo == Tipo_Veicolo.AUTOBUS) {
+            this.capienza = 70;
+        } else {
+            this.capienza = 100;
+        }
     }
 
     public UUID getId() {

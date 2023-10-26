@@ -35,8 +35,18 @@ public class Application {
         //RIEMPIMENTO DATABASE
         //fillerDataBase();
 
+//        TROVA TUTTI I BIGLIETTI VITIMATI SU UN VEICOLO
+//        UUID id = UUID.fromString("01364c7a-fd7f-41a7-9d75-9b9e49f7be8f");
+//        bigliettoDAO.getNumTicketsVitimatiByVeicolo(id);
 
-        System.out.println("Hello World!");
+        //TROVA TUTTI I BIGLIETTI VITIMATI IN UN DETERMINATO PERIODO
+        //bigliettoDAO.getNumTicketsVitimatiByPeriod(LocalDate.of(2020, 1, 1), LocalDate.of(2021, 1, 1));
+
+
+        //DETTAGLI SERVIZIO
+//        UUID id = UUID.fromString("0009b1c7-eef0-4282-adb3-b9e62c8e704d");
+//        servizioDAO.servizioDetails(id);
+//        System.out.println("Hello World!");
     }
 
     public static void fillerDataBase() {
@@ -55,7 +65,7 @@ public class Application {
         Supplier<Utente> utenteSupplier = () -> new Utente(faker.name().firstName(), faker.name().lastName(), LocalDate.now().minusYears(rndm.nextInt(12, 70)).minusDays(rndm.nextInt(0, 365)));
         Supplier<Rivenditore> rivenditoreSupplier = () -> new Rivenditore(faker.address().streetAddress());
         Supplier<Distributore> distributoreSupplier = () -> new Distributore(faker.address().streetAddress(), Stato_Distributore.randomDistributore());
-        Supplier<Tratta> trattaSupplier = () -> new Tratta(faker.address().streetAddress(), faker.address().streetAddress(), rndm.nextInt(25, 60));
+        Supplier<Tratta> trattaSupplier = () -> new Tratta(faker.address().streetAddress(), faker.address().streetAddress(), rndm.nextInt(40, 60));
         Supplier<Veicolo> veicoloSupplier = () -> new Veicolo(Stato_Veicolo.randomStatoVeicolo(), Tipo_Veicolo.randomTipoVeicolo());
 
 
