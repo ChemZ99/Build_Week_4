@@ -61,7 +61,7 @@ public class AbbonamentoDAO {
         numAbbPVQuery.setParameter("pv", pv);
         Long count = numAbbPVQuery.getSingleResult();
         if (count > 0) {
-            System.out.println("Il numero di abbonamenti venduti dal rivenditore con ID "+ pv + "é: "+ count);
+            System.out.println("Il numero di abbonamenti venduti dal rivenditore con ID "+ pv + " é: "+ count);
         } else {
             System.out.println("Non sono presenti abbonamenti venduti da questo rivenditore");
         }
