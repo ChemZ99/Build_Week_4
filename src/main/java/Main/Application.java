@@ -8,6 +8,7 @@ import com.github.javafaker.Faker;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -33,8 +34,48 @@ public class Application {
         TesseraDAO tesseraDAO = new TesseraDAO(em);
         Random rndm = new Random();
 
-        //RIEMPIMENTO DATABASE
-        //fillerDataBase();
+//VITIMARE UN BIGLIETTO
+
+        //UUID id = UUID.fromString("0019ae84-3279-459a-b41a-ebdbec683129");
+        //bigliettoDAO.checkTicket(id);
+
+        //PASSARE DISTRIBUTORE DA ATTIVO A FUORI SERVIZIO
+        //PASSARE DISTRIBUTORE DA FUORI SERVIZIO A ATTIVO
+
+        //UUID id = UUID.fromString("07fbe3f2-72c4-40a1-856f-262d4a84ff35");
+        // emissioneDAO.changeDistributoreStatus(id);
+
+    }
+
+
+    public static void changeVeicoloStatus(UUID id) {
+        EntityManager em = emf.createEntityManager();
+        ManutenzioneDAO manutenzioneDAO = new ManutenzioneDAO(em);
+        ServizioDAO servizioDAO = new ServizioDAO(em);
+        VeicoloDAO veicoloDAO = new VeicoloDAO(em);
+        Random rndm = new Random();
+        TrattaDAO trattaDAO = new TrattaDAO(em);
+
+        Veicolo v = veicoloDAO.getById(id);
+        if (v.getStato() == Stato_Veicolo.MANUTENZIONE) {
+            TypedQuery<Manutenzione> queryman = em.createQuery("SELECT m FROM Manutenzione m WHERE m.veicolo.id = :id AND m.fine = null", Manutenzione.class);
+            queryman.setParameter("id", id);
+            Manutenzione m = queryman.getSingleResult();
+            m.setFine(LocalDate.now());
+            manutenzioneDAO.save(m);
+            v.setStato(Stato_Veicolo.SERVIZIO);
+            veicoloDAO.save(v);
+            List<Tratta> listaTra = trattaDAO.getAllTratte();
+            int c = rndm.nextInt(0, listaTra.size() - 1);
+            Servizio s = new Servizio(LocalDateTime.now(), v, listaTra.get(c));
+            servizioDAO.save(s);
+        } else {
+            v.setStato(Stato_Veicolo.MANUTENZIONE);
+            veicoloDAO.save(v);
+            Manutenzione m = new Manutenzione(LocalDate.now(), null, v);
+            manutenzioneDAO.save(m);
+
+        }
 
     }
 
