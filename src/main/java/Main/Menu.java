@@ -5,6 +5,7 @@ import Main.DAO.*;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import java.time.LocalDate;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.UUID;
@@ -50,30 +51,109 @@ public class Menu {
                             printCounter = Integer.parseInt(input.nextLine());
                             switch (printCounter) {
                                 case 1: {
+                                    System.out.println();
                                     System.out.println("************************************LISTA DI UTENTI************************************");
                                     utenteDAO.getAllUsers().forEach(System.out::println);
                                     break;
                                 }
                                 case 2: {
+                                    System.out.println();
                                     System.out.println("************************************LISTA DI VEICOLI************************************");
                                     veicoloDAO.getAllVeicoli().forEach(System.out::println);
                                     break;
                                 }
                                 case 3: {
+                                    System.out.println();
                                     System.out.println("************************************LISTA DI RIVENDITORI************************************");
                                     emissioneDAO.getAllRivenditori().forEach(System.out::println);
                                     break;
                                 }
                                 case 4: {
-                                    System.out.println("****************************BIGLIETTI TOTALI IN UN LASSO DI TEMPO****************************");
+                                    LocalDate startDate;
+                                    LocalDate endDate;
+
+                                    while (true) {
+                                        System.out.println("Inserisci la data d'inizio (AAAA-MM-GG): ");
+                                        String startDateStr = input.nextLine();
+
+                                        try {
+                                            startDate = LocalDate.parse(startDateStr);
+                                            break;
+                                        } catch (Exception e) {
+                                            System.out.println("Data non valida. Riprova.");
+                                        }
+                                    }
+                                    while (true) {
+                                        System.out.println("Inserisci la data di fine (AAAA-MM-GG): ");
+                                        String endDateStr = input.nextLine();
+
+                                        try {
+                                            endDate = LocalDate.parse(endDateStr);
+                                            if (endDate.isAfter(startDate)) {
+                                                System.out.println("La data di fine deve essere uguale o successiva alla data d'inizio. Riprova.");
+                                            }else if (endDate.isAfter(LocalDate.now())){
+                                                System.out.println("La data di fine non puó essere nel futuro. Riprova.");
+                                            }else {
+                                                System.out.println();
+                                                System.out.println("****************************BIGLIETTI TOTALI IN UN LASSO DI TEMPO****************************");
+                                                bigliettoDAO.getNumTicketsByPeriod(startDate,endDate);
+                                                break;
+                                            }
+                                        } catch (Exception e) {
+                                            System.out.println("Data non valida. Riprova.");
+                                        }
+                                    }
                                     break;
+
                                 }
                                 case 5: {
-                                    System.out.println("*****************************BIGLIETTI TOTALI PER RIVENDITORE******************************");
+                                    UUID idRivenditore;
+                                    while (true) {
+                                        System.out.println("Inserisci l'id di un rivenditore.");
+                                        String idRiv = input.nextLine();
+
+                                            try {
+                                                if (idRiv.length() == 36) {
+
+                                                idRivenditore = UUID.fromString(idRiv);
+                                                    System.out.println();
+                                                System.out.println("*****************************BIGLIETTI TOTALI PER RIVENDITORE******************************");
+                                                bigliettoDAO.getNumTicketsByPV(idRivenditore);
+                                                    System.out.println();
+                                                break;
+                                                } else {
+                                                    System.out.println("La stringa deve avere esattamente 36 caratteri. Riprova.");
+                                                }
+
+                                            } catch (Exception e) {
+                                                System.out.println("UUID non valido. Riprova.");
+                                            }
+                                    }
                                     break;
                                 }
                                 case 6: {
-                                    System.out.println("*****************************VERIFICA VALIDITA' ABBONAMENTO******************************");
+                                    UUID idTessera;
+                                    while (true) {
+                                        System.out.println("Inserisci l'id di una tessera.");
+                                        String idTes = input.nextLine();
+
+                                        try {
+                                            if (idTes.length() == 36) {
+
+                                                idTessera = UUID.fromString(idTes);
+                                                System.out.println();
+                                                System.out.println("*****************************VERIFICA VALIDITA' ABBONAMENTO******************************");
+                                                abbonamentoDAO.isSubsciptionValid(idTessera);
+                                                System.out.println();
+                                                break;
+                                            } else {
+                                                System.out.println("La stringa deve avere esattamente 36 caratteri. Riprova.");
+                                            }
+
+                                        } catch (Exception e) {
+                                            System.out.println("UUID non valido. Riprova.");
+                                        }
+                                    }
                                     break;
                                 }
                                 case 7: {
