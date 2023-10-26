@@ -22,7 +22,7 @@ public class Tessera {
     @JoinColumn(name = "id_utente")
     private Utente utente;
 
-    @OneToMany(mappedBy = "tessera")
+    @OneToMany(mappedBy = "tessera", cascade = CascadeType.REMOVE)
     private List<Abbonamento> abbonamento;
 
     public Tessera() {

@@ -14,7 +14,7 @@ public class Utente {
     private String cognome;
     private LocalDate data_nascita;
 
-    @OneToOne(mappedBy = "utente")
+    @OneToOne(mappedBy = "utente", cascade = CascadeType.REMOVE)
     private Tessera tessera;
 
     public Utente() {

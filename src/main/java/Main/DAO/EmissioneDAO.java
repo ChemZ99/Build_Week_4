@@ -1,8 +1,6 @@
 package Main.DAO;
 
-import Main.Entities.Distributore;
-import Main.Entities.Emissione;
-import Main.Entities.Rivenditore;
+import Main.Entities.*;
 import Main.Enum.Stato_Distributore;
 
 import javax.persistence.EntityManager;
@@ -36,6 +34,14 @@ public class EmissioneDAO {
         if (selectedEl != null) {
             EntityTransaction transaction = em.getTransaction();
             transaction.begin();
+            if (selectedEl instanceof Rivenditore){
+                for (Abbonamento abbonamento : ((Rivenditore) selectedEl).getLista()) {
+                    abbonamento.setPunto_emissione(null);
+                }
+            }
+            for (Biglietto biglietto : selectedEl.getLista_biglietti()) {
+                biglietto.setPuntoEmissione(null);
+            }
             em.remove(selectedEl);
             transaction.commit();
             System.out.println("Il punto vendita con l'id " + id + " é stata correttamente cancellato");
