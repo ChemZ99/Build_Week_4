@@ -6,12 +6,12 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.time.LocalDate;
-import java.util.Random;
 import java.util.Scanner;
 import java.util.UUID;
 
 public class Menu {
     public static EntityManagerFactory emf = Persistence.createEntityManagerFactory("BUILD_WEEK_4");
+
     public static void main(String[] args) {
         EntityManager em = emf.createEntityManager();
         EmissioneDAO emissioneDAO = new EmissioneDAO(em);
@@ -89,14 +89,14 @@ public class Menu {
 
                                         try {
                                             endDate = LocalDate.parse(endDateStr);
-                                            if (endDate.isAfter(startDate)) {
+                                            if (endDate.isBefore(startDate)) {
                                                 System.out.println("La data di fine deve essere uguale o successiva alla data d'inizio. Riprova.");
-                                            }else if (endDate.isAfter(LocalDate.now())){
+                                            } else if (endDate.isAfter(LocalDate.now())) {
                                                 System.out.println("La data di fine non puó essere nel futuro. Riprova.");
-                                            }else {
+                                            } else {
                                                 System.out.println();
                                                 System.out.println("****************************BIGLIETTI TOTALI IN UN LASSO DI TEMPO****************************");
-                                                bigliettoDAO.getNumTicketsByPeriod(startDate,endDate);
+                                                bigliettoDAO.getNumTicketsByPeriod(startDate, endDate);
                                                 break;
                                             }
                                         } catch (Exception e) {
@@ -111,22 +111,22 @@ public class Menu {
                                         System.out.println("Inserisci l'id di un rivenditore.");
                                         String idRiv = input.nextLine();
 
-                                            try {
-                                                if (idRiv.length() == 36) {
+                                        try {
+                                            if (idRiv.length() == 36) {
 
                                                 idRivenditore = UUID.fromString(idRiv);
-                                                    System.out.println();
+                                                System.out.println();
                                                 System.out.println("*****************************BIGLIETTI TOTALI PER RIVENDITORE******************************");
                                                 bigliettoDAO.getNumTicketsByPV(idRivenditore);
-                                                    System.out.println();
+                                                System.out.println();
                                                 break;
-                                                } else {
-                                                    System.out.println("La stringa deve avere esattamente 36 caratteri. Riprova.");
-                                                }
-
-                                            } catch (Exception e) {
-                                                System.out.println("UUID non valido. Riprova.");
+                                            } else {
+                                                System.out.println("La stringa deve avere esattamente 36 caratteri. Riprova.");
                                             }
+
+                                        } catch (Exception e) {
+                                            System.out.println("UUID non valido. Riprova.");
+                                        }
                                     }
                                     break;
                                 }
@@ -176,14 +176,14 @@ public class Menu {
 
                                         try {
                                             endDate = LocalDate.parse(endDateStr);
-                                            if (endDate.isAfter(startDate)) {
+                                            if (endDate.isBefore(startDate)) {
                                                 System.out.println("La data di fine deve essere uguale o successiva alla data d'inizio. Riprova.");
-                                            }else if (endDate.isAfter(LocalDate.now())){
+                                            } else if (endDate.isAfter(LocalDate.now())) {
                                                 System.out.println("La data di fine non puó essere nel futuro. Riprova.");
-                                            }else {
+                                            } else {
                                                 System.out.println();
                                                 System.out.println("*************************BIGLIETTI VIDIMATI IN UN LASSO DI TEMPO**************************");
-                                                bigliettoDAO.getNumTicketsVitimatiByPeriod(startDate,endDate);
+                                                bigliettoDAO.getNumTicketsVitimatiByPeriod(startDate, endDate);
                                                 break;
                                             }
                                         } catch (Exception e) {
