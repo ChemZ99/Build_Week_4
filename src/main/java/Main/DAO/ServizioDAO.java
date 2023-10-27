@@ -44,8 +44,9 @@ public class ServizioDAO {
         TypedQuery<Servizio> servizioQuery = em.createQuery("SELECT s FROM Servizio s INNER JOIN Tratta t ON t.id=s.tratta.id  WHERE s.id = :sid ", Servizio.class);
         servizioQuery.setParameter("sid", s);
         Servizio ser = servizioQuery.getSingleResult();
-        System.out.println("durante questo servizio il veicolo ha percorso " + ser.getN_tratte() + " volte la tratta assegnata");
-        System.out.println("in un tempo effettivo di : " + ser.getDurata_media() + " minuti per tratta,");
-        System.out.println("quando normalmente la sua durata stimata è di " + ser.getTratta().getTempo_medio() + " minuti");
+        System.out.println("durante questo servizio il veicolo con id " + ser.getVeicolo().getId());
+        System.out.println(" ha percorso " + ser.getN_tratte() + " volte la tratta assegnata");
+        System.out.println("in un tempo effettivo di " + ser.getDurata_media() + " minuti per tratta,");
+        System.out.println(" quando normalmente la sua durata stimata è di " + ser.getTratta().getTempo_medio() + " minuti");
     }
 }

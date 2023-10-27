@@ -68,7 +68,9 @@ public class EmissioneDAO {
             } else {
                 ((Distributore) e).setStato(Stato_Distributore.ATTIVO);
             }
+            System.out.println("stato del distributore cambiato con successo");
             save(e);
+
         } else {
             System.out.println("l'id inserito non corrisponde a un distributore automatico!!!");
         }

@@ -330,6 +330,7 @@ public class Menu {
                                                 System.err.println("UUID non valido. Riprova.");
                                             }
                                         }
+                                        break;
                                     }
                                     case 4: {
                                         System.out.println("*************************RINNOVARE ABBONAMENTO**************************");
