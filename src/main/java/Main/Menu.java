@@ -253,9 +253,37 @@ public class Menu {
                         while (modifyCounter != 0) {
                             System.out.println("************************************FUNZIONI DI MODIFICA************************************");
                             System.out.println("implementazione opzionale scrivi 0 per tornare indietro");
+                            System.out.println("scrivi 1 per vidimare un biglietto, 2 per eliminare una tessera, 3 per eliminare un abbonamento");
                             modifyCounter = Integer.parseInt(input.nextLine());
-                        }
+                            switch (modifyCounter) {
+                                case 1: {
+                                    System.out.println("*************************VIDIMAZIONE BIGLIETTO**************************");
+                                    System.out.println("inserisci l' UUID del veicolo");
+                                    String v = input.nextLine();
+                                    UUID veicoloId = UUID.fromString(v);
+                                    System.out.println("inserisci l' UUID del biglietto");
+                                    String b = input.nextLine();
+                                    UUID bigliettoId = UUID.fromString(b);
+                                    break;
+                                }
+                                case 2: {
+                                    System.out.println("*************************CAMBIARE STATO DISTRIBUTORE**************************");
+                                    System.out.println("inserisci l' UUID del distributore");
+                                    String target = input.nextLine();
+                                    UUID targetId = UUID.fromString(target);
+                                    break;
+                                }
+                                case 3: {
+                                    System.out.println("*************************CAMBIARE STATO VEICOLO**************************");
+                                    System.out.println("inserisci l' UUID del veicolo");
+                                    String target = input.nextLine();
+                                    UUID targetId = UUID.fromString(target);
+
+                                    break;
+                                }
+                            }
                         break;
+                        }
                     }
                     case 3: {
                         while (deleteCounter != 0) {
