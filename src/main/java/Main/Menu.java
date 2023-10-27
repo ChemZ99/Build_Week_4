@@ -1,6 +1,7 @@
 package Main;
 
 import Main.DAO.*;
+import Main.Enum.Tipo_Abbonamento;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -80,7 +81,7 @@ public class Menu {
                                             startDate = LocalDate.parse(startDateStr);
                                             break;
                                         } catch (Exception e) {
-                                            System.out.println("Data non valida. Riprova.");
+                                            System.err.println("Data non valida. Riprova.");
                                         }
                                     }
                                     while (true) {
@@ -90,9 +91,9 @@ public class Menu {
                                         try {
                                             endDate = LocalDate.parse(endDateStr);
                                             if (endDate.isBefore(startDate)) {
-                                                System.out.println("La data di fine deve essere uguale o successiva alla data d'inizio. Riprova.");
+                                                System.err.println("La data di fine deve essere uguale o successiva alla data d'inizio. Riprova.");
                                             } else if (endDate.isAfter(LocalDate.now())) {
-                                                System.out.println("La data di fine non puó essere nel futuro. Riprova.");
+                                                System.err.println("La data di fine non puó essere nel futuro. Riprova.");
                                             } else {
                                                 System.out.println();
                                                 System.out.println("****************************BIGLIETTI TOTALI IN UN LASSO DI TEMPO****************************");
@@ -100,7 +101,7 @@ public class Menu {
                                                 break;
                                             }
                                         } catch (Exception e) {
-                                            System.out.println("Data non valida. Riprova.");
+                                            System.err.println("Data non valida. Riprova.");
                                         }
                                     }
                                     break;
@@ -123,11 +124,11 @@ public class Menu {
                                                 System.out.println("Il numero di biglietti e abbonamenti totali venduti da questo rivenditore é: " + tot);
                                                 break;
                                             } else {
-                                                System.out.println("La stringa deve avere esattamente 36 caratteri. Riprova.");
+                                                System.err.println("La stringa deve avere esattamente 36 caratteri. Riprova.");
                                             }
 
                                         } catch (Exception e) {
-                                            System.out.println("UUID non valido. Riprova.");
+                                            System.err.println("UUID non valido. Riprova.");
                                         }
                                     }
                                     break;
@@ -148,11 +149,11 @@ public class Menu {
                                                 System.out.println();
                                                 break;
                                             } else {
-                                                System.out.println("La stringa deve avere esattamente 36 caratteri. Riprova.");
+                                                System.err.println("La stringa deve avere esattamente 36 caratteri. Riprova.");
                                             }
 
                                         } catch (Exception e) {
-                                            System.out.println("UUID non valido. Riprova.");
+                                            System.err.println("UUID non valido. Riprova.");
                                         }
                                     }
                                     break;
@@ -169,7 +170,7 @@ public class Menu {
                                             startDate = LocalDate.parse(startDateStr);
                                             break;
                                         } catch (Exception e) {
-                                            System.out.println("Data non valida. Riprova.");
+                                            System.err.println("Data non valida. Riprova.");
                                         }
                                     }
                                     while (true) {
@@ -179,9 +180,9 @@ public class Menu {
                                         try {
                                             endDate = LocalDate.parse(endDateStr);
                                             if (endDate.isBefore(startDate)) {
-                                                System.out.println("La data di fine deve essere uguale o successiva alla data d'inizio. Riprova.");
+                                                System.err.println("La data di fine deve essere uguale o successiva alla data d'inizio. Riprova.");
                                             } else if (endDate.isAfter(LocalDate.now())) {
-                                                System.out.println("La data di fine non puó essere nel futuro. Riprova.");
+                                                System.err.println("La data di fine non puó essere nel futuro. Riprova.");
                                             } else {
                                                 System.out.println();
                                                 System.out.println("*************************BIGLIETTI VIDIMATI IN UN LASSO DI TEMPO**************************");
@@ -189,7 +190,7 @@ public class Menu {
                                                 break;
                                             }
                                         } catch (Exception e) {
-                                            System.out.println("Data non valida. Riprova.");
+                                            System.err.println("Data non valida. Riprova.");
                                         }
                                     }
                                     break;
@@ -210,11 +211,11 @@ public class Menu {
                                                 System.out.println();
                                                 break;
                                             } else {
-                                                System.out.println("La stringa deve avere esattamente 36 caratteri. Riprova.");
+                                                System.err.println("La stringa deve avere esattamente 36 caratteri. Riprova.");
                                             }
 
                                         } catch (Exception e) {
-                                            System.out.println("UUID non valido. Riprova.");
+                                            System.err.println("UUID non valido. Riprova.");
                                         }
                                     }
                                     break;
@@ -235,11 +236,11 @@ public class Menu {
                                                 System.out.println();
                                                 break;
                                             } else {
-                                                System.out.println("La stringa deve avere esattamente 36 caratteri. Riprova.");
+                                                System.err.println("La stringa deve avere esattamente 36 caratteri. Riprova.");
                                             }
 
                                         } catch (Exception e) {
-                                            System.out.println("UUID non valido. Riprova.");
+                                            System.err.println("UUID non valido. Riprova.");
                                         }
                                     }
                                     break;
@@ -253,17 +254,32 @@ public class Menu {
                         while (modifyCounter != 0) {
                             System.out.println("************************************FUNZIONI DI MODIFICA************************************");
                             System.out.println("scrivi 1 per vidimare un biglietto, 2 per cambiare stato di un distributore, 3 per cambiare stato di un veicolo");
+                            System.out.println("scrivi 4 per rinnovare un abbonamento scaduto");
                             System.out.println("scrivi 0 per tornare al menu principale");
                             modifyCounter = Integer.parseInt(input.nextLine());
                             switch (modifyCounter) {
                                 case 1: {
                                     System.out.println("*************************VIDIMAZIONE BIGLIETTO**************************");
-                                    System.out.println("inserisci l' UUID del veicolo");
-                                    String v = input.nextLine();
-                                    UUID veicoloId = UUID.fromString(v);
-                                    System.out.println("inserisci l' UUID del biglietto");
-                                    String b = input.nextLine();
-                                    UUID bigliettoId = UUID.fromString(b);
+                                    while (true) {
+                                        System.out.println("inserisci l' UUID del biglietto");
+                                        String b = input.nextLine();
+                                            if (b.length() != 36) {
+                                                System.err.println("La stringa deve avere esattamente 36 caratteri. Riprova.");
+                                            }
+                                        System.out.println("inserisci l' UUID del veicolo");
+                                        String v = input.nextLine();
+                                            if (v.length() != 36) {
+                                                System.err.println("La stringa deve avere esattamente 36 caratteri. Riprova.");
+                                            }
+                                        try {
+                                                UUID veicoloId = UUID.fromString(v);
+                                                UUID bigliettoId = UUID.fromString(b);
+                                                Application.checkTicket(bigliettoId, veicoloId);
+                                                break;
+                                        } catch (Exception e) {
+                                            System.err.println("UUID non valido. Riprova.");
+                                        }
+                                    }
                                     break;
                                 }
                                 case 2: {
@@ -277,11 +293,11 @@ public class Menu {
                                                 emissioneDAO.changeDistributoreStatus(targetId);
                                                 break;
                                             } else {
-                                                System.out.println("La stringa deve avere esattamente 36 caratteri. Riprova.");
+                                                System.err.println("La stringa deve avere esattamente 36 caratteri. Riprova.");
                                             }
 
                                         } catch (Exception e) {
-                                            System.out.println("UUID non valido. Riprova.");
+                                            System.err.println("UUID non valido. Riprova.");
                                         }
                                     }
                                     break;
@@ -297,11 +313,45 @@ public class Menu {
                                             Application.changeVeicoloStatus(targetId);
                                             break;
                                         } else {
-                                            System.out.println("La stringa deve avere esattamente 36 caratteri. Riprova.");
+                                            System.err.println("La stringa deve avere esattamente 36 caratteri. Riprova.");
                                         }
 
                                     } catch (Exception e) {
-                                        System.out.println("UUID non valido. Riprova.");
+                                        System.err.println("UUID non valido. Riprova.");
+                                        }
+                                    }
+                                }
+                                case 4: {
+                                    System.out.println("*************************RINNOVARE ABBONAMENTO**************************");
+                                    while (true) {
+                                        System.out.println("Inserisci l' UUID della tessera.");
+                                        String t = input.nextLine();
+                                        if (t.length() != 36) {
+                                            System.err.println("La stringa deve avere esattamente 36 caratteri. Riprova.");
+                                        }
+                                        System.out.println("Inserisci l' UUID del rivenditore.");
+                                        String r = input.nextLine();
+                                        if (r.length() != 36) {
+                                            System.err.println("La stringa deve avere esattamente 36 caratteri. Riprova.");
+                                        }
+                                        System.out.println("Scrivi S per fare un abbonamento settimanale o M per un abbonamento mensile");
+                                        String a = input.nextLine();
+                                        Tipo_Abbonamento tipoAbbonamento;
+                                        if (a.equalsIgnoreCase("S")){
+                                            tipoAbbonamento = Tipo_Abbonamento.SETTIMANALE;
+                                        }else if (a.equalsIgnoreCase("M")){
+                                            tipoAbbonamento = Tipo_Abbonamento.MENSILE;
+                                        }else {
+                                            System.err.println("Input non valido. Inserisci S o M");
+                                            continue;
+                                        }
+                                    try {
+                                            UUID id_tes = UUID.fromString(t);
+                                            UUID id_riv = UUID.fromString(r);
+                                        abbonamentoDAO.renewAbbonamento(id_tes, id_riv, tipoAbbonamento);
+                                        break;
+                                    } catch (Exception e) {
+                                        System.err.println("UUID non valido. Riprova.");
                                         }
                                     }
                                 }
