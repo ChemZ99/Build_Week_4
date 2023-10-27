@@ -116,9 +116,11 @@ public class Menu {
 
                                                 idRivenditore = UUID.fromString(idRiv);
                                                 System.out.println();
-                                                System.out.println("*****************************BIGLIETTI TOTALI PER RIVENDITORE******************************");
-                                                bigliettoDAO.getNumTicketsByPV(idRivenditore);
-                                                System.out.println();
+                                                System.out.println("*****************************BIGLIETTI E ABBONAMENTI TOTALI PER RIVENDITORE******************************");
+                                                long numBigliettiRiv = bigliettoDAO.getNumTicketsByPV(idRivenditore);
+                                                long numAbbRi = abbonamentoDAO.getNumAbbByPV(idRivenditore);
+                                                long tot = numAbbRi + numBigliettiRiv;
+                                                System.out.println("Il numero di biglietti e abbonamenti totali venduti da questo rivenditore é: " + tot);
                                                 break;
                                             } else {
                                                 System.out.println("La stringa deve avere esattamente 36 caratteri. Riprova.");
@@ -269,6 +271,8 @@ public class Menu {
                                     System.out.println("inserisci l' UUID dell' utente");
                                     String target = input.nextLine();
                                     UUID targetId = UUID.fromString(target);
+                                    utenteDAO.delete(targetId);
+
                                     break;
                                 }
                                 case 2: {
@@ -276,6 +280,7 @@ public class Menu {
                                     System.out.println("inserisci l' UUID della tessera");
                                     String target = input.nextLine();
                                     UUID targetId = UUID.fromString(target);
+                                    tesseraDAO.delete(targetId);
                                     break;
                                 }
                                 case 3: {
@@ -283,6 +288,7 @@ public class Menu {
                                     System.out.println("inserisci l' UUID dell' abbonamento");
                                     String target = input.nextLine();
                                     UUID targetId = UUID.fromString(target);
+                                    abbonamentoDAO.delete(targetId);
                                     break;
                                 }
                                 case 4: {
@@ -290,6 +296,7 @@ public class Menu {
                                     System.out.println("inserisci l' UUID del punto vendita");
                                     String target = input.nextLine();
                                     UUID targetId = UUID.fromString(target);
+                                    emissioneDAO.delete(targetId);
                                     break;
                                 }
                                 case 5: {
@@ -297,6 +304,7 @@ public class Menu {
                                     System.out.println("inserisci l' UUID del biglietto");
                                     String target = input.nextLine();
                                     UUID targetId = UUID.fromString(target);
+                                    bigliettoDAO.delete(targetId);
                                     break;
                                 }
                                 case 6: {
@@ -304,6 +312,7 @@ public class Menu {
                                     System.out.println("inserisci l' UUID del veicolo");
                                     String target = input.nextLine();
                                     UUID targetId = UUID.fromString(target);
+                                    veicoloDAO.delete(targetId);
                                     break;
                                 }
                                 case 7: {
@@ -311,6 +320,7 @@ public class Menu {
                                     System.out.println("inserisci l' UUID del servizio");
                                     String target = input.nextLine();
                                     UUID targetId = UUID.fromString(target);
+                                    servizioDAO.delete(targetId);
                                     break;
                                 }
                                 case 8: {
@@ -318,6 +328,7 @@ public class Menu {
                                     System.out.println("inserisci l' UUID della manutenzione");
                                     String target = input.nextLine();
                                     UUID targetId = UUID.fromString(target);
+                                    manutenzioneDAO.delete(targetId);
                                     break;
                                 }
                                 case 9: {
@@ -325,6 +336,7 @@ public class Menu {
                                     System.out.println("inserisci l' UUID della tratta");
                                     String target = input.nextLine();
                                     UUID targetId = UUID.fromString(target);
+                                    trattaDAO.delete(targetId);
                                     break;
                                 }
                             }

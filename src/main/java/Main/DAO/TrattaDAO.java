@@ -1,5 +1,7 @@
 package Main.DAO;
 
+import Main.Entities.Biglietto;
+import Main.Entities.Servizio;
 import Main.Entities.Tratta;
 
 import javax.persistence.EntityManager;
@@ -40,6 +42,9 @@ public class TrattaDAO {
         if (selectedEl != null) {
             EntityTransaction transaction = em.getTransaction();
             transaction.begin();
+            for (Servizio servizio : selectedEl.getLista_servizi()) {
+                servizio.setTratta(null);
+            }
             em.remove(selectedEl);
             transaction.commit();
             System.out.println("La tratta con l'id " + id + " é stata correttamente cancellata");

@@ -24,9 +24,9 @@ public class Veicolo {
     @OneToMany(mappedBy = "veicolo")
     private List<Biglietto> lista_biglietti;
 
-    @OneToMany(mappedBy = "veicolo")
+    @OneToMany(mappedBy = "veicolo", cascade = CascadeType.ALL)
     private List<Manutenzione> lista_veicolo;
-    @OneToMany(mappedBy = "veicolo")
+    @OneToMany(mappedBy = "veicolo", cascade = CascadeType.ALL)
     private List<Servizio> lista_servizi;
 
     public Veicolo() {

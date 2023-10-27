@@ -34,6 +34,8 @@ public class Application {
         TesseraDAO tesseraDAO = new TesseraDAO(em);
         Random rndm = new Random();
 
+        fillerDataBase();
+
 //VITIMARE UN BIGLIETTO
 
         //UUID id = UUID.fromString("0019ae84-3279-459a-b41a-ebdbec683129");
