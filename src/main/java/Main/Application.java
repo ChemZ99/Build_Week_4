@@ -22,37 +22,7 @@ public class Application {
 
     public static void main(String[] args) {
 
-        EntityManager em = emf.createEntityManager();
-        EmissioneDAO emissioneDAO = new EmissioneDAO(em);
-        UtenteDAO utenteDAO = new UtenteDAO(em);
-        TrattaDAO trattaDAO = new TrattaDAO(em);
-        VeicoloDAO veicoloDAO = new VeicoloDAO(em);
-        AbbonamentoDAO abbonamentoDAO = new AbbonamentoDAO(em);
-        BigliettoDAO bigliettoDAO = new BigliettoDAO(em);
-        ManutenzioneDAO manutenzioneDAO = new ManutenzioneDAO(em);
-        ServizioDAO servizioDAO = new ServizioDAO(em);
-        TesseraDAO tesseraDAO = new TesseraDAO(em);
-        Random rndm = new Random();
-
-        // fillerDataBase();
-
-//VITIMARE UN BIGLIETTO
-
-        UUID idB = UUID.fromString("002b147f-bbab-403d-a247-310a07daa324");
-        UUID idV = UUID.fromString("035a25d5-028d-4ca4-bdc1-3ff40afd6104");
-        checkTicket(idB, idV);
-
-        //PASSARE DISTRIBUTORE DA ATTIVO A FUORI SERVIZIO
-        //PASSARE DISTRIBUTORE DA FUORI SERVIZIO A ATTIVO
-
-        //UUID id = UUID.fromString("07fbe3f2-72c4-40a1-856f-262d4a84ff35");
-        // emissioneDAO.changeDistributoreStatus(id);
-
-
-//RINNOVA ABBONAMENTO
-//        UUID id_tes = UUID.fromString("011b8af7-04cb-4c87-8a74-cb230b78e6fb");
-//        UUID id_riv = UUID.fromString("030b7702-834a-43f3-9263-e969a18ef362");
-//        abbonamentoDAO.renewAbbonamento(id_tes, id_riv, Tipo_Abbonamento.MENSILE);
+         fillerDataBase();
     }
 
     public static void changeVeicoloStatus(UUID id) {
@@ -210,7 +180,16 @@ public class Application {
                 bigliettoDAO.save(b);
             }
         }
+        // lista di tutti i veicoli
 
+        List<Veicolo> allVehicles = veicoloDAO.getAllVeicoli();
+
+        for (int i = 0; i < 150; i++) {
+            int c = rndm.nextInt(0, allVehicles.size() -1);
+            LocalDate d1 = LocalDate.now().minusYears(rndm.nextInt(0,5)).minusDays(rndm.nextInt(61,365));
+            LocalDate d2 = d1.plusDays(rndm.nextInt(0,30));
+            manutenzioneDAO.save(new Manutenzione(d1,d2,allVehicles.get(c)));
+        }
     }
 
     public static void checkTicket(UUID idB, UUID idV) {
