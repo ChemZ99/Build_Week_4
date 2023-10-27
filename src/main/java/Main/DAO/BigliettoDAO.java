@@ -1,7 +1,6 @@
 package Main.DAO;
 
 import Main.Entities.Biglietto;
-import Main.Enum.Stato_Biglietto;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -98,16 +97,5 @@ public class BigliettoDAO {
         }
     }
 
-    public void checkTicket(UUID id) {
-        Biglietto b = getById(id);
 
-        if (b.getStato() == Stato_Biglietto.UTILIZZABILE) {
-            b.setDataVidimazione(LocalDate.now());
-            b.setStato(Stato_Biglietto.VITIMATO);
-            save(b);
-        } else {
-            System.out.println("il biglietto è già vitimato! ");
-        }
-
-    }
 }
