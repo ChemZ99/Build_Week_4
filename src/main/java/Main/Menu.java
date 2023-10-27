@@ -261,7 +261,9 @@ public class Menu {
                         case 2: {
                             while (modifyCounter != 0) {
                                 System.out.println("************************************FUNZIONI DI MODIFICA************************************");
-                                System.out.println("Scrivi 1 per vidimare un biglietto, 2 per cambiare stato di un distributore, 3 per cambiare stato di un veicolo");
+                                System.out.println("Scrivi 1 per vidimare un biglietto");
+                                System.out.println("Scrivi 2 per cambiare stato di un distributore");
+                                System.out.println("Scrivi 3 per cambiare stato di un veicolo");
                                 System.out.println("Scrivi 4 per rinnovare un abbonamento scaduto");
                                 System.out.println("Scrivi 0 per tornare al menu principale");
                                 modifyCounter = Integer.parseInt(input.nextLine());
