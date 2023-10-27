@@ -252,8 +252,8 @@ public class Menu {
                     case 2: {
                         while (modifyCounter != 0) {
                             System.out.println("************************************FUNZIONI DI MODIFICA************************************");
-                            System.out.println("implementazione opzionale scrivi 0 per tornare indietro");
-                            System.out.println("scrivi 1 per vidimare un biglietto, 2 per eliminare una tessera, 3 per eliminare un abbonamento");
+                            System.out.println("scrivi 1 per vidimare un biglietto, 2 per cambiare stato di un distributore, 3 per cambiare stato di un veicolo");
+                            System.out.println("scrivi 0 per tornare al menu principale");
                             modifyCounter = Integer.parseInt(input.nextLine());
                             switch (modifyCounter) {
                                 case 1: {
@@ -268,22 +268,46 @@ public class Menu {
                                 }
                                 case 2: {
                                     System.out.println("*************************CAMBIARE STATO DISTRIBUTORE**************************");
-                                    System.out.println("inserisci l' UUID del distributore");
-                                    String target = input.nextLine();
-                                    UUID targetId = UUID.fromString(target);
+                                    while (true) {
+                                        System.out.println("inserisci l' UUID del distributore");
+                                        String target = input.nextLine();
+                                        try {
+                                            if (target.length() == 36) {
+                                                UUID targetId = UUID.fromString(target);
+                                                emissioneDAO.changeDistributoreStatus(targetId);
+                                                break;
+                                            } else {
+                                                System.out.println("La stringa deve avere esattamente 36 caratteri. Riprova.");
+                                            }
+
+                                        } catch (Exception e) {
+                                            System.out.println("UUID non valido. Riprova.");
+                                        }
+                                    }
                                     break;
                                 }
                                 case 3: {
                                     System.out.println("*************************CAMBIARE STATO VEICOLO**************************");
-                                    System.out.println("inserisci l' UUID del veicolo");
-                                    String target = input.nextLine();
-                                    UUID targetId = UUID.fromString(target);
+                                    while (true) {
+                                        System.out.println("Inserisci l' UUID del veicolo.");
+                                        String target = input.nextLine();
+                                    try {
+                                        if (target.length() == 36) {
+                                            UUID targetId = UUID.fromString(target);
+                                            Application.changeVeicoloStatus(targetId);
+                                            break;
+                                        } else {
+                                            System.out.println("La stringa deve avere esattamente 36 caratteri. Riprova.");
+                                        }
 
-                                    break;
+                                    } catch (Exception e) {
+                                        System.out.println("UUID non valido. Riprova.");
+                                        }
+                                    }
                                 }
                             }
-                        break;
                         }
+                        break;
                     }
                     case 3: {
                         while (deleteCounter != 0) {
@@ -291,7 +315,7 @@ public class Menu {
                             System.out.println("scrivi 1 per eliminare un utente, 2 per eliminare una tessera, 3 per eliminare un abbonamento");
                             System.out.println("scrivi 4 per eliminare un punto vendita, 5 per eliminare un biglietto, 6 per eliminare un veicolo");
                             System.out.println("scrivi 7 per eliminare un servizio, 8 per eliminare una manutenzione, 9 per eliminare una tratta");
-                            System.out.println("scrivi 0 per tornare indietro");
+                            System.out.println("scrivi 0 per tornare al menu principale");
                             deleteCounter = Integer.parseInt(input.nextLine());
                             switch (deleteCounter) {
                                 case 1: {
