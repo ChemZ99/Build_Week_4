@@ -34,12 +34,13 @@ public class Application {
         TesseraDAO tesseraDAO = new TesseraDAO(em);
         Random rndm = new Random();
 
-        fillerDataBase();
+        // fillerDataBase();
 
 //VITIMARE UN BIGLIETTO
 
-        //UUID id = UUID.fromString("0019ae84-3279-459a-b41a-ebdbec683129");
-        //bigliettoDAO.checkTicket(id);
+        UUID idB = UUID.fromString("002b147f-bbab-403d-a247-310a07daa324");
+        UUID idV = UUID.fromString("035a25d5-028d-4ca4-bdc1-3ff40afd6104");
+        checkTicket(idB, idV);
 
         //PASSARE DISTRIBUTORE DA ATTIVO A FUORI SERVIZIO
         //PASSARE DISTRIBUTORE DA FUORI SERVIZIO A ATTIVO
@@ -49,11 +50,10 @@ public class Application {
 
 
 //RINNOVA ABBONAMENTO
-        UUID id_tes = UUID.fromString("011b8af7-04cb-4c87-8a74-cb230b78e6fb");
-        UUID id_riv = UUID.fromString("030b7702-834a-43f3-9263-e969a18ef362");
-        abbonamentoDAO.renewAbbonamento(id_tes, id_riv, Tipo_Abbonamento.MENSILE);
+//        UUID id_tes = UUID.fromString("011b8af7-04cb-4c87-8a74-cb230b78e6fb");
+//        UUID id_riv = UUID.fromString("030b7702-834a-43f3-9263-e969a18ef362");
+//        abbonamentoDAO.renewAbbonamento(id_tes, id_riv, Tipo_Abbonamento.MENSILE);
     }
-
 
     public static void changeVeicoloStatus(UUID id) {
         EntityManager em = emf.createEntityManager();
@@ -209,6 +209,25 @@ public class Application {
                 b.setDataVidimazione(d);
                 bigliettoDAO.save(b);
             }
+        }
+
+    }
+
+    public static void checkTicket(UUID idB, UUID idV) {
+        EntityManager em = emf.createEntityManager();
+        BigliettoDAO bigliettoDAO = new BigliettoDAO(em);
+        VeicoloDAO veicoloDAO = new VeicoloDAO(em);
+
+        Veicolo v = veicoloDAO.getById(idV);
+        Biglietto b = bigliettoDAO.getById(idB);
+
+        if (b.getStato() == Stato_Biglietto.UTILIZZABILE) {
+            b.setDataVidimazione(LocalDate.now());
+            b.setStato(Stato_Biglietto.VITIMATO);
+            b.setVeicolo(v);
+            bigliettoDAO.save(b);
+        } else {
+            System.out.println("il biglietto è già vitimato! ");
         }
 
     }
