@@ -45,6 +45,11 @@ public class Application {
         //UUID id = UUID.fromString("07fbe3f2-72c4-40a1-856f-262d4a84ff35");
         // emissioneDAO.changeDistributoreStatus(id);
 
+
+//RINNOVA ABBONAMENTO
+        UUID id_tes = UUID.fromString("011b8af7-04cb-4c87-8a74-cb230b78e6fb");
+        UUID id_riv = UUID.fromString("030b7702-834a-43f3-9263-e969a18ef362");
+        abbonamentoDAO.renewAbbonamento(id_tes, id_riv, Tipo_Abbonamento.MENSILE);
     }
 
 

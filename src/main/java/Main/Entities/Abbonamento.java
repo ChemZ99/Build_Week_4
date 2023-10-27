@@ -29,7 +29,7 @@ public class Abbonamento {
     private Tessera tessera;
 
     public Abbonamento(Rivenditore punto_emissione, LocalDate data_emissione, Tipo_Abbonamento tipo_abbonamento, Tessera tessera) {
-        
+
         this.punto_emissione = punto_emissione;
         this.data_emissione = data_emissione;
         this.tipo_abbonamento = tipo_abbonamento;
@@ -113,4 +113,6 @@ public class Abbonamento {
                 ", tessera=" + tessera +
                 '}';
     }
+
+
 }
